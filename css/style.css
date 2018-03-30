@@ -1,0 +1,42 @@
+.btest {
+  border: 1px solid rgb(255, 0, 0);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #131313 !important;
+  color: #ffffff !important;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
+.col {
+  margin-top: 50px;
+}
+
+.player-area {
+  margin-top: 30px;
+  background-color: #1b1b1b;
+  border-radius: 8px;
+  padding-bottom: 20px;
+}
+
+.btn-success,
+.btn-primary {
+  margin-top: 10px;
+}
+
+.hidden{
+    display: none;
+    z-index: -1;;
+}

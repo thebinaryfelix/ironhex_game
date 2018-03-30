@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+        
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="landing-page">
+        <header>
+            <div class="col col-md-8 col-md-offset-2">
+                <h1>Iron Ballz</h1>
+            </div>
+        </header>
+        <div class="container">
+            <div class="row">
+                <div class="player-area col-sm-4 col-md-offset-4">
+                    <h2>Player</h2>
+                    <form class="form-group">
+                        <div class="col-md-10 col-md-offset-1">
+                            <input type="text" class="form-control" id="input-player" maxlength="20" placeholder="Insert nickname">
+                        </div>
+                        <button type="button" class="btn col-sm-4 col-sm-offset-4 btn-success" id="btn-start">Start</button>
+                        <button type="button" class="btn col-sm-4 col-sm-offset-4 btn-primary" id="btn-show-score">Show score</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="main-board" class="board-game hidden btest" width="800" height="500"></canvas>
+    <script src="js/game.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
