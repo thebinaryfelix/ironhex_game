@@ -10,7 +10,6 @@ $(function() {
   });
 });
 
-//Load game board
 function loadBoard() {
   $(".landing-page").addClass("hidden");
   $(".board-game").removeClass("hidden");
@@ -18,7 +17,6 @@ function loadBoard() {
   //Creates var iron_ballz that will store Game object
   var iron_ballz = new Game("main-board");
 
-  //Calls Game method "startGame" to initialize game
   iron_ballz.startGame();
 
   //Alert user before refreshing or closing page
