@@ -1,2 +1,2 @@
-# iron_ballz_game
+# IronHex Game
 First Ironhack Game Project
