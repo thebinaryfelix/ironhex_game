@@ -11,7 +11,7 @@ function Enemy(game) {
   this._position_Y = Math.floor(Math.random()*(this._game._board.height - this._cellHeight) - this._cellHeight);
 
   this._velocity_X = 1;
-  this._velocity_Y = 2;
+  this._velocity_Y = 1;
 }
 
 Enemy.prototype.receiveDamage = function() {};
@@ -28,3 +28,10 @@ Enemy.prototype.move = function() {
     this._velocity_Y *= -1;
   }
 };
+
+Enemy.prototype.draw = function(){
+  this._game._ctx.beginPath();
+  this._game._ctx.arc(this._position_X, this._position_Y, 20, 0, 2 * Math.PI);
+  this._game._ctx.fill();
+  this._game._ctx.closePath();
+}

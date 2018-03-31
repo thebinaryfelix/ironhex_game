@@ -6,6 +6,7 @@ function Game(boardName) {
   this._playerData = [];
   this._player = new Player(this);
   this._skill = new Skills(this);
+  this._enemies = [];
   this._fps = 60;
 }
 
@@ -24,6 +25,13 @@ Game.prototype.startGame = function() {
     }.bind(this),
     1000 / this._fps
   );
+
+  this.interval = setInterval(
+    function() {
+      if(this._enemies.length <= 5){
+        this.addEnemies();
+      }
+    }.bind(this), 1000);
 };
 
 //Game Over
@@ -39,7 +47,8 @@ Game.prototype.clear = function() {
 
 //Add the NPC characters
 Game.prototype.addEnemies = function() {
-  this._enemies = new Enemy(this);
+  var enemy = new Enemy(this)
+  this._enemies.push(enemy);
 };
 
 //Randomly add Iron Snacks to the board to make player and NPC's grow
@@ -54,12 +63,13 @@ Game.prototype.addPlayers = function() {
     this._player._score = initialScore;
     this._playerData.push(this._player);
     this._player.setActiveSkill();
-
 };
 
 //Calls methods that will move objects on the board (players and enemies)
 Game.prototype.move = function() {
-  //this._enemies.move(); //Enemies move randomly
+  this._enemies.forEach(function(enemy){
+    enemy.move();
+  }.bind(this)); //Enemies move randomly
 };
 
 //Check collision of player with enemies, other players and the Iron Snacks
@@ -69,4 +79,9 @@ Game.prototype.savePlayerData = function() {};
 
 Game.prototype.draw = function() {
   this._player.draw();
+  if(this._enemies.length > 0){
+    this._enemies.forEach(function(enemy){
+      enemy.draw();
+    }.bind(this));
+  }
 };
