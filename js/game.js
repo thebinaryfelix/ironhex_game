@@ -3,7 +3,8 @@ function Game(boardName) {
   this._board = document.getElementById(boardName);
   this._ctx = this._board.getContext("2d");
   this._gameStarted = false;
-  this._players = [];
+  this._playerData = [];
+  this._player = new Player(this);
   this._enemies = [];
   this._fps = 30;
 }
@@ -44,15 +45,15 @@ Game.prototype.addFood = function() {};
 
 //Add new player when start button is pressed
 Game.prototype.addPlayer = function(name, initialScore) {
-  var player = new Player(this._board, this._ctx, name, initialScore);
-  this._players.push(player);
-  player.skill();
+  this._player._name = name;
+  this._player._score = initialScore;
+  this._playerData.push(this._player);
+  this._player.setActiveSkill();
 };
 
 //Calls methods that will move objects on the board (players and enemies)
 Game.prototype.move = function() {
-  this._players[0].move();
-  this._players[1].move();
+  this._player.move();
 };
 
 //Check collision of player with enemies, other players and the Iron Snacks
