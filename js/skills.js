@@ -1,4 +1,5 @@
-function Skills(board) {
+function Skills(game) {
+  this._game = game;
   this._skillSet = [
     {
       //Starting point

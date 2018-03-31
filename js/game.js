@@ -4,8 +4,9 @@ function Game(boardName) {
   this._ctx = this._board.getContext("2d");
   this._gameStarted = false;
   this._playerData = [];
+  this._enemies = new Enemy(this);
   this._player = new Player(this);
-  this._enemies = [];
+  this._skill = new Skills(this);
   this._fps = 30;
 }
 
@@ -30,6 +31,7 @@ Game.prototype.startGame = function() {
 //Game Over
 Game.prototype.stopGame = function() {
   this._gameStarted = false;
+  //this.savePlayerData();
 };
 
 //Clear board
@@ -53,10 +55,12 @@ Game.prototype.addPlayer = function(name, initialScore) {
 
 //Calls methods that will move objects on the board (players and enemies)
 Game.prototype.move = function() {
-  this._player.move();
+
 };
 
 //Check collision of player with enemies, other players and the Iron Snacks
 Game.prototype.checkCollisions = function() {};
+
+Game.prototype.savePlayerData = function() {};
 
 Game.prototype.draw = function() {};

@@ -9,12 +9,11 @@ var A_KEY = 65;
 var D_KEY = 68;
 var Z_KEY = 90;
 
-function Player(boardName, ctx) {
-  this._board = boardName;
-  this._ctx = ctx;
+function Player(game) {
+  this._game = game;
 
-  this._life = 50; //Increases with amount of food eaten
-  this._strength = 0; //More usefull against other players and protects from other player's attacks
+  this._life = 100; //Increases with amount of food eaten
+  this._strength = 200; //More usefull against other players and protects from other player's attacks
 
   this._cellWidth = 50; //Changes with amount of Iron Snacks eaten
   this._cellHeight = 50; //Changes with amount of Iron Snacks eaten
@@ -27,16 +26,13 @@ function Player(boardName, ctx) {
   this.setListener();
 }
 
-Player.prototype.score = function() {};
-
-Player.prototype.receiveDamage = function() {};
+Player.prototype.score = function() {
+};
 
 Player.prototype.setActiveSkill = function() {
   var skillIndex = Math.floor(this._score / 50);
   this._skill._skillSet[skillIndex].activeSkill = true;
 };
-
-Player.prototype.strength = function() {};
 
 Player.prototype.setListener = function() {
   document.onkeydown = function(pressedKey) {
@@ -84,3 +80,6 @@ Player.prototype.moveRight = function(index) {
 Player.prototype.moveDown = function(index) {
   console.log("Moving down player " + index);
 };
+
+Player.prototype.savePlayerData = function(){
+}
