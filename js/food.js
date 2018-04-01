@@ -1,7 +1,7 @@
 function Ironsnack(game) {
     this._game = game;
 
-    this._energy = Math.floor(Math.random() * 15 + 5); //Random number between 10 and 50
+    this._energy = Math.floor(Math.random() * 20 + 5); //Random number between 10 and 15
   
     this._diagonal = this._energy;
     this._side = Math.sqrt(
@@ -13,27 +13,15 @@ function Ironsnack(game) {
   }
   
   Ironsnack.prototype.draw = function() {
-   
-    this._game._ctx.beginPath();
-    this._game._ctx.moveTo(this._position_X, this._position_Y - this._diagonal);
-    this._game._ctx.lineTo(
-      this._position_X + this._side,
-      this._position_Y - this._diagonal / 2
-    );
-    this._game._ctx.lineTo(
-      this._position_X + this._side,
-      this._position_Y + this._diagonal / 2
-    );
-    this._game._ctx.lineTo(this._position_X, this._position_Y + this._diagonal);
-    this._game._ctx.lineTo(
-      this._position_X - this._side,
-      this._position_Y + this._diagonal / 2
-    );
-    this._game._ctx.lineTo(
-      this._position_X - this._side,
-      this._position_Y - this._diagonal / 2
-    );
-    this._game._ctx.moveTo(this._position_X, this._position_Y - this._diagonal);
-    this._game._ctx.fill();
-    this._game._ctx.closePath();
+    var color = '';
+    if(this._energy <= 8){
+      color = '#FF8506';
+    }
+    else if(this._energy <= 13){
+      color = '#25E02F';
+    }
+    else{
+      color = '#790D8C';
+    }
+    drawHex(this._game, this._position_X, this._position_Y, this._side, this._diagonal, color);
   };
