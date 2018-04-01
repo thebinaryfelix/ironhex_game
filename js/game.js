@@ -4,7 +4,6 @@ function Game(boardName) {
   this._gameStarted = false;
   this._score = 0;
   this._player = [new Player(this), new Player(this)];
-  this._skill = new Skills(this);
   this._food = [];
   this._enemies = [];
 }
@@ -78,7 +77,7 @@ Game.prototype.addPlayers = function() {
 };
 
 Game.prototype.move = function() {
-  
+
   this._enemies.forEach(
     function(enemy) {
       enemy.move();
@@ -94,8 +93,8 @@ Game.prototype.update = function() {
 
   this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
   this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
-  this._player[0].updatePosition();
-  this._player[1].updatePosition();
+    this._player[0].updatePosition();
+    this._player[1].updatePosition();
   this._player[0].draw();
   this._player[1].draw();
 

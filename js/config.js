@@ -3,10 +3,10 @@ FPS = 60;
 TIME_DELTA = 1000/FPS;
 
 //PLAYERS
-V_UNITS = 10;
+V_UNITS = 20; //Change characters speed here
 SPEED = V_UNITS / TIME_DELTA;
 
-DIAGONAL_COS = Math.cos(Math.PI / 4);
+DIAGONAL_COS = Math.cos(Math.PI / 4); //Setting as speed multiplier the cosine of 45 degrees
 
 //CONTROLS
 PLAYER1_CONTROLS = {
