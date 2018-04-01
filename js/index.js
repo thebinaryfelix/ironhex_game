@@ -1,3 +1,5 @@
+var keys = {};
+
 $(function() {
   //Call function to load game board
   $("#btn-start").click(function() {
@@ -28,3 +30,12 @@ function loadBoard() {
 }
 
 function showScore() {}
+
+//Keyboard listeners
+document.addEventListener("keydown", function(pressedKey) {
+  keys[pressedKey.keyCode] = true;
+}, false)
+
+document.addEventListener("keyup", function(releasedKey) {
+  keys[releasedKey.keyCode] = false;
+}, false)

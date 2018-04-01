@@ -1,17 +1,7 @@
-var SPACE_KEY = 32;
-var LEFT_KEY = 37;
-var UP_KEY = 38;
-var RIGHT_KEY = 39;
-var DOWN_KEY = 40;
-var keys = [];
-/* var W_KEY = 87;
-var S_KEY = 83;
-var A_KEY = 65;
-var D_KEY = 68;
-var Z_KEY = 90; */
-
 function Player(game) {
   this._game = game;
+
+  /*   Positionable.call(this); */
 
   this._life = 30; //Increases with amount of food eaten
   this._strength = this._life * 2; //More usefull against other players and protects from other player's attacks
@@ -24,12 +14,10 @@ function Player(game) {
   this._position_X = this._side;
   this._position_Y = this._diagonal;
 
-  this._velocity_X = 5;
-  this._velocity_Y = 5;
+  this._velocity_X = 3;
+  this._velocity_Y = 3;
 
   this._skill = new Skills(this); //Stores one or more skills gained by eating Iron Snacks
-
-  this.setListener();
 }
 
 Player.prototype.score = function() {};
@@ -39,56 +27,52 @@ Player.prototype.setActiveSkill = function() {
   this._skill._skillSet[skillIndex].activeSkill = true;
 };
 
-Player.prototype.setListener = function() {
-  document.onkeydown = function(pressedKey) {
-    keys[pressedKey.keyCode] = true;
-    if (keys[LEFT_KEY]) {
-      this.moveLeft();
-    } else if (keys[RIGHT_KEY]) {
-      this.moveRight();
+Player.prototype.setMove = function(value) {
+  if (value.moving_X == -1) {
+    if (value.moving_Y == -1) {
+      debugger;
+      this._velocity_X = -DIAGONAL_COS;
+      this._velocity_Y = -DIAGONAL_COS;
+    } else if (value.moving_Y == 1) {
+      debugger;
+      this._velocity_X = -DIAGONAL_COS;
+      this._velocity_Y = DIAGONAL_COS;
+    } else {
+      this._velocity_X = -1;
+      this._velocity_Y = 0;
     }
-    if (keys[UP_KEY]) {
-      this.moveUp();
-    } else if (keys[DOWN_KEY]) {
-      this.moveDown();
+  } else if (value.moving_X == 1) {
+    if (value.moving_Y == -1) {
+      debugger;
+      this._velocity_X = DIAGONAL_COS;
+      this._velocity_Y = -DIAGONAL_COS;
+    } else if (value.moving_Y == 1) {
+      debugger;
+      this._velocity_X = DIAGONAL_COS;
+      this._velocity_Y = DIAGONAL_COS;
+    } else {
+      this._velocity_X = 1;
+      this._velocity_Y = 0;
     }
-  }.bind(this);
-  document.onkeyup = function keysReleased(releasedKey) {
-    keys[releasedKey.keyCode] = false;
-  };
+  } else {
+    if (value.moving_Y == -1) {
+      debugger;
+      this._velocity_X = 0;
+      this._velocity_Y = -1;
+    } else if (value.moving_Y == 1) {
+      debugger;
+      this._velocity_X = 0;
+      this._velocity_Y = 1;
+    } else {
+      this._velocity_X = 0;
+      this._velocity_Y = 0;
+    }
+  }
+  this._position_X += this._velocity_X;
+  this._position_Y += this._velocity_Y;
 };
 
-Player.prototype.moveLeft = function() {
-  if (this._position_X - this._side <= 0) {
-    return;
-  } else {
-    this._position_X -= this._velocity_X;
-  }
-};
-
-Player.prototype.moveUp = function() {
-  if (this._position_Y - this._diagonal <= 0) {
-    return;
-  } else {
-    this._position_Y -= this._velocity_Y;
-  }
-};
-
-Player.prototype.moveRight = function() {
-  if (this._position_X + this._side >= this._game._board.width) {
-    return;
-  } else {
-    this._position_X += this._velocity_X;
-  }
-};
-
-Player.prototype.moveDown = function() {
-  if (this._position_Y + this._diagonal >= this._game._board.height) {
-    return;
-  } else {
-    this._position_Y += this._velocity_Y;
-  }
-};
+Player.prototype.updatePosition = function() {};
 
 Player.prototype.savePlayerData = function() {};
 

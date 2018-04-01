@@ -2,12 +2,11 @@ function Game(boardName) {
   this._board = document.getElementById(boardName);
   this._ctx = this._board.getContext("2d");
   this._gameStarted = false;
-  this._playerData = [];
-  this._player = new Player(this);
+  this._score = 0;
+  this._player = [new Player(this), new Player(this)];
   this._skill = new Skills(this);
   this._food = [];
   this._enemies = [];
-  this._fps = 60;
 }
 
 Game.prototype.startGame = function() {
@@ -25,7 +24,7 @@ Game.prototype.startGame = function() {
       this.update();
       this.checkCollisions();
     }.bind(this),
-    1000 / this._fps
+    TIME_DELTA
   );
 };
 
@@ -39,16 +38,18 @@ Game.prototype.clear = function() {
 
 Game.prototype.addEnemies = function() {
   
-  this.interval = setInterval(
-    function() {
-      if (this._enemies.length < 5) {
-        var enemy = new Enemy(this);
-        this._enemies.push(enemy);
-        this.addEnemies();
-      }
-    }.bind(this),
-    100
-  );
+  if (this._enemies.length < 5){
+    this.interval = setInterval(
+      function() {
+        if(this._enemies.length < 5){
+          var enemy = new Enemy(this);
+          this._enemies.push(enemy);
+          this.addEnemies();
+        }
+  }.bind(this),
+  100);
+
+}
 };
 
 Game.prototype.addFood = function() {
@@ -63,11 +64,11 @@ Game.prototype.addFood = function() {
 Game.prototype.addPlayers = function() {
   var name = "Dev1";
   var initialScore = 0;
+  this._player[0]._id = 1;
 
-  this._player._name = name;
-  this._player._score = initialScore;
-  this._playerData.push(this._player);
-  this._player.setActiveSkill();
+  this._player[0]._name = name;
+  this._player[0]._score = initialScore;
+  this._player[0].setActiveSkill();
 };
 
 Game.prototype.move = function() {
@@ -84,8 +85,9 @@ Game.prototype.checkCollisions = function() {};
 Game.prototype.savePlayerData = function() {};
 
 Game.prototype.update = function() {
-  console.log("1");
-  this._player.draw();
+
+  this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
+  this._player[0].draw();
 
   if (this._enemies.length > 0) {
     this._enemies.forEach(
