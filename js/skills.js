@@ -1,29 +1,20 @@
-function Skills(game) {
-  this._game = game;
-  this._skillSet = [
+SKILL_SET = [
     {
       //Starting point
-      skillName: "None",
-      activeSkill: true,
-      receiveDamage: true
+      skillName: null,
+      receiveDamage: true,
+      timeSpan: false
     },
     {
       //Gained after eating 50 Iron Snacks
       skillName: "Helix",
-      activeSkill: false,
       receiveDamage: true,
-      useFor: 2 //Number of times it can be used
+      timeSpan: true
     },
     {
       //Gained after eating 100 Iron Snacks
       skillName: "Iron Immunity",
-      activeSkill: false,
       receiveDamage: false,
-      timeSpan: 5 //In seconds, the time of skill duration
+      timeSpan: true
     }
   ];
-}
-
-
-
-
