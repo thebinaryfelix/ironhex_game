@@ -48,7 +48,6 @@ Game.prototype.addEnemies = function() {
         }
   }.bind(this),
   100);
-
 }
 };
 
@@ -62,13 +61,20 @@ Game.prototype.addFood = function() {
 };
 
 Game.prototype.addPlayers = function() {
-  var name = "Dev1";
+  var name1 = "Dev1";
   var initialScore = 0;
   this._player[0]._id = 1;
 
   this._player[0]._name = name;
   this._player[0]._score = initialScore;
   this._player[0].setActiveSkill();
+
+  var name2 = "Dev2";
+  this._player[1]._id = 2;
+
+  this._player[1]._name = name2;
+  this._player[1]._score = initialScore;
+  this._player[1].setActiveSkill();
 };
 
 Game.prototype.move = function() {
@@ -87,7 +93,11 @@ Game.prototype.savePlayerData = function() {};
 Game.prototype.update = function() {
 
   this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
+  this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
+  this._player[0].updatePosition();
+  this._player[1].updatePosition();
   this._player[0].draw();
+  this._player[1].draw();
 
   if (this._enemies.length > 0) {
     this._enemies.forEach(

@@ -13,6 +13,7 @@ function Ironsnack(game) {
   }
   
   Ironsnack.prototype.draw = function() {
+   
     this._game._ctx.beginPath();
     this._game._ctx.moveTo(this._position_X, this._position_Y - this._diagonal);
     this._game._ctx.lineTo(

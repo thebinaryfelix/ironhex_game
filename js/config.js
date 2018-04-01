@@ -2,6 +2,10 @@
 FPS = 60;
 TIME_DELTA = 1000/FPS;
 
+//PLAYERS
+V_UNITS = 10;
+SPEED = V_UNITS / TIME_DELTA;
+
 DIAGONAL_COS = Math.cos(Math.PI / 4);
 
 //CONTROLS
@@ -14,9 +18,9 @@ PLAYER1_CONTROLS = {
 }
 
 PLAYER2_CONTROLS = {
-    W: 87,
-    S: 83,
-    A: 65,
-    D: 68,
+    UP: 87,
+    DOWN: 83,
+    LEFT: 65,
+    RIGHT: 68,
     SKILL: 90
 }

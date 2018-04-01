@@ -1,0 +1,1 @@
+/* Define base object for positioning players, enemies and snacks */

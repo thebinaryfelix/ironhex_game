@@ -14,8 +14,8 @@ function Player(game) {
   this._position_X = this._side;
   this._position_Y = this._diagonal;
 
-  this._velocity_X = 3;
-  this._velocity_Y = 3;
+  this._direction_X = 0;
+  this._direction_Y = 0;
 
   this._skill = new Skills(this); //Stores one or more skills gained by eating Iron Snacks
 }
@@ -30,49 +30,45 @@ Player.prototype.setActiveSkill = function() {
 Player.prototype.setMove = function(value) {
   if (value.moving_X == -1) {
     if (value.moving_Y == -1) {
-      debugger;
-      this._velocity_X = -DIAGONAL_COS;
-      this._velocity_Y = -DIAGONAL_COS;
+      this._direction_X = -DIAGONAL_COS;
+      this._direction_Y = -DIAGONAL_COS;
     } else if (value.moving_Y == 1) {
-      debugger;
-      this._velocity_X = -DIAGONAL_COS;
-      this._velocity_Y = DIAGONAL_COS;
+      this._direction_X = -DIAGONAL_COS;
+      this._direction_Y = DIAGONAL_COS;
     } else {
-      this._velocity_X = -1;
-      this._velocity_Y = 0;
+      this._direction_X = -1;
+      this._direction_Y = 0;
     }
   } else if (value.moving_X == 1) {
     if (value.moving_Y == -1) {
-      debugger;
-      this._velocity_X = DIAGONAL_COS;
-      this._velocity_Y = -DIAGONAL_COS;
+      this._direction_X = DIAGONAL_COS;
+      this._direction_Y = -DIAGONAL_COS;
     } else if (value.moving_Y == 1) {
-      debugger;
-      this._velocity_X = DIAGONAL_COS;
-      this._velocity_Y = DIAGONAL_COS;
+      this._direction_X = DIAGONAL_COS;
+      this._direction_Y = DIAGONAL_COS;
     } else {
-      this._velocity_X = 1;
-      this._velocity_Y = 0;
+      this._direction_X = 1;
+      this._direction_Y = 0;
     }
   } else {
     if (value.moving_Y == -1) {
-      debugger;
-      this._velocity_X = 0;
-      this._velocity_Y = -1;
+      this._direction_X = 0;
+      this._direction_Y = -1;
     } else if (value.moving_Y == 1) {
-      debugger;
-      this._velocity_X = 0;
-      this._velocity_Y = 1;
+      this._direction_X = 0;
+      this._direction_Y = 1;
     } else {
-      this._velocity_X = 0;
-      this._velocity_Y = 0;
+      this._direction_X = 0;
+      this._direction_Y = 0;
     }
   }
-  this._position_X += this._velocity_X;
-  this._position_Y += this._velocity_Y;
+  
 };
 
-Player.prototype.updatePosition = function() {};
+Player.prototype.updatePosition = function() {
+  this._position_X += this._direction_X * SPEED;
+  this._position_Y += this._direction_Y * SPEED;
+};
 
 Player.prototype.savePlayerData = function() {};
 
