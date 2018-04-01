@@ -6,7 +6,7 @@ TIME_DELTA = 1000/FPS;
 V_UNITS = 20; //Change characters speed here
 SPEED = V_UNITS / TIME_DELTA;
 
-DIAGONAL_COS = Math.cos(Math.PI / 4); //Setting as speed multiplier the cosine of 45 degrees
+DIAGONAL_COS = Math.cos(Math.PI / 4); //Otherwise, speed will add up when pressing two keys at the same time.
 
 //CONTROLS
 PLAYER1_CONTROLS = {

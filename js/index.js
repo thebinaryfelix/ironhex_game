@@ -3,7 +3,13 @@ var keys = {};
 $(function() {
   //Call function to load game board
   $("#btn-start").click(function() {
-    loadBoard();
+    //Uncoment lines below when game ready to play
+//    if($("#input-player-1").val() == "" || $("#input-player-2").val() == ""){
+//      alert("HOHOHO! You must have a name, dear youngling!");
+//    }
+//    else{
+      loadBoard();
+//     }
   });
 
   //Show players name and score on landing page
@@ -17,19 +23,22 @@ function loadBoard() {
   $(".board-game").removeClass("hidden");
 
   //Creates var iron_ballz that will store Game object
-  var iron_ballz = new Game("main-board");
+  var ironhex = new Game("main-board");
 
-  iron_ballz.startGame();
+  ironhex.startGame();
 
   //Alert user before refreshing or closing page
-  window.onbeforeunload = function() {
+  //Uncoment lines below when game ready to play
+  /* window.onbeforeunload = function() {
     if (iron_ballz._gameStarted) {
       return true;
     }
-  };
+  }; */
 }
 
-function showScore() {}
+function showScore() {
+  //Show score of both players...
+}
 
 //Keyboard listeners
 document.addEventListener("keydown", function(pressedKey) {
