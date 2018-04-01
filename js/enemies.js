@@ -30,8 +30,5 @@ Enemy.prototype.move = function() {
 };
 
 Enemy.prototype.draw = function(){
-  this._game._ctx.beginPath();
-  this._game._ctx.arc(this._position_X, this._position_Y, this._radius-2, 0, 2 * Math.PI);
-  this._game._ctx.fill();
-  this._game._ctx.closePath();
+  drawEnemy(this._game, this._position_X, this._position_Y, this._radius);
 }

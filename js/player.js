@@ -1,7 +1,7 @@
 function Player(game) {
   this._game = game;
 
-  this._life = 30; //Increases with amount of food eaten
+  this._life = 40; //Increases with amount of food eaten
   this._strength = this._life * 2; //More usefull against other players and protects from other player's attacks
 
   this._diagonal = Math.floor(this._life / 2);
@@ -99,28 +99,7 @@ Player.prototype.updatePosition = function() {
 Player.prototype.savePlayerData = function() {};
 
 Player.prototype.draw = function() {
-  this._game._ctx.beginPath();
-  this._game._ctx.moveTo(this._position_X, this._position_Y - this._diagonal);
-  this._game._ctx.lineTo(
-    this._position_X + this._side,
-    this._position_Y - this._diagonal / 2
-  );
-  this._game._ctx.lineTo(
-    this._position_X + this._side,
-    this._position_Y + this._diagonal / 2
-  );
-  this._game._ctx.lineTo(this._position_X, this._position_Y + this._diagonal);
-  this._game._ctx.lineTo(
-    this._position_X - this._side,
-    this._position_Y + this._diagonal / 2
-  );
-  this._game._ctx.lineTo(
-    this._position_X - this._side,
-    this._position_Y - this._diagonal / 2
-  );
-  this._game._ctx.moveTo(this._position_X, this._position_Y - this._diagonal);
-  this._game._ctx.fill();
-  this._game._ctx.closePath();
+  drawHex(this._game, this._position_X, this._position_Y, this._side, this._diagonal, '#000000');
 };
 
 Player.prototype.rotatingAttack = function() {};

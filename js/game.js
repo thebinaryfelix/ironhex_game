@@ -85,20 +85,6 @@ Game.prototype.checkCollisions = function() {};
 Game.prototype.savePlayerData = function() {};
 
 Game.prototype.update = function() {
-  this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
-  this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
-  this._player[0].updatePosition();
-  this._player[1].updatePosition();
-  this._player[0].draw();
-  this._player[1].draw();
-
-  if (this._enemies.length > 0) {
-    this._enemies.forEach(
-      function(enemy) {
-        enemy.draw();
-      }.bind(this)
-    );
-  }
 
   if (this._food.length > 0) {
     this._food.forEach(
@@ -107,4 +93,20 @@ Game.prototype.update = function() {
       }.bind(this)
     );
   }
+  
+  this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
+  this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
+  this._player[0].updatePosition();
+  this._player[1].updatePosition();
+  this._player[0].draw();
+  this._player[1].draw();
+  
+  if (this._enemies.length > 0) {
+    this._enemies.forEach(
+      function(enemy) {
+        enemy.draw();
+      }.bind(this)
+    );
+  }
+
 };
