@@ -71,11 +71,11 @@ Game.prototype.addPlayers = function() {
   this._player[0]._id = 1;
   this._player[0]._name = $("#input-player-1").val();
   this._player[0]._score = initialScore;
-  this._player[0].setActiveSkill();
+
   this._player[1]._id = 2;
   this._player[1]._name = $("#input-player-2").val();
   this._player[1]._score = initialScore;
-  this._player[1].setActiveSkill();
+  
 };
 
 Game.prototype.move = function() {
@@ -96,10 +96,13 @@ Game.prototype.update = function() {
   }
 
   this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
-  this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
+  this._player[0].setActiveSkill();
   this._player[0].updatePosition();
-  this._player[1].updatePosition();
   this._player[0].draw();
+
+  this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
+  this._player[1].setActiveSkill();
+  this._player[1].updatePosition();
   this._player[1].draw();
 
   if (this._enemies.length > 0) {
@@ -114,10 +117,13 @@ Game.prototype.update = function() {
 Game.prototype.checkCollisions = function() {
   var player1 = getPosition(this._player[0]);
   var player2 = getPosition(this._player[1]);
+
   //Check collision between players
   checkHexCollision(player1, player2);
 
   var snack = this._food;
+  var enemy = this._enemies;
+  
   //Check collision between player and snack
   if (snack.length != 0) {
     for (var i = 0; i < snack.length; i++) {
@@ -131,14 +137,22 @@ Game.prototype.checkCollisions = function() {
       }
     }
   }
-
-  //Check collision between player and enemies
-  var enemy = this._enemies;
+  
   if (enemy.length != 0) {
     for (var i = 0; i < enemy.length; i++) {
       checkHexCollision(player1, getPosition(enemy[i]));
       checkHexCollision(player2, getPosition(enemy[i]));
+      if (snack.length != 0) {
+        for (var j = 0; j < snack.length; j++) {
+          if (checkHexCollision(getPosition(enemy[i]), getPosition(snack[j]))) {
+            enemy[i].eatSnack(snack[j], 0);
+            this._food.splice(j, 1);
+          }
+        }
+      }
     }
   }
-};
+  
+}
+
 Game.prototype.savePlayerData = function() {};

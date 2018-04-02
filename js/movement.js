@@ -16,7 +16,7 @@ function checkHexCollision(obj1, obj2) {
     Math.abs(obj1.pos_X - obj2.pos_X) <= 2 * obj1.side &&
     Math.abs(obj1.pos_Y - obj2.pos_Y) <= 2 * obj1.diagonal
   ) {
-    //console.log("Colision!!");
+    console.log("Colision!!");
     return true;
   } else {
     return false;

@@ -25,8 +25,6 @@ function Enemy(game) {
 
 Enemy.prototype.receiveDamage = function() {};
 
-Enemy.prototype.strength = function() {};
-
 Enemy.prototype.move = function() {
   this._position_X += this._velocity_X;
   this._position_Y += this._velocity_Y;
@@ -55,4 +53,10 @@ Enemy.prototype.draw = function() {
     "#C40500",
     this._life
   );
+};
+
+Enemy.prototype.eatSnack = function(snack) {
+  if (this._life <= MAX_LIFE) {
+    this._life += snack._energy;
+  }
 };
