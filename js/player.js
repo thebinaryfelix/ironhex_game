@@ -1,29 +1,19 @@
-function Player(game) {
+function Player(game, INITIAL_X_INCREMENT, INITIAL_Y_INCREMENT) {
   this._game = game;
-
-  this._life = LIFE; //Increases with amount of food eaten
-  this._strength = this._life * 1.5; //More usefull against other players and protects from other player's attacks
-
+  this._life = LIFE;
   this._diagonal = Math.floor(this._life / 2);
   this._side = Math.sqrt(
     Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
   );
 
-  this._position_X = this._side;
-  this._position_Y = this._diagonal;
+  this._position_X = this._side + INITIAL_X_INCREMENT;
+  this._position_Y = this._diagonal + INITIAL_Y_INCREMENT;
 
   this._direction_X = 0;
   this._direction_Y = 0;
 
   this._skill = []; //Stores one or more skills gained by eating Iron Snacks
 }
-
-Player.prototype.setActiveSkill = function() {
-  var skillIndex = Math.floor(this._score / 50);
-  for (var i = 0; i <= skillIndex; i++) {
-    this._skill.push(SKILL_SET[skillIndex]);
-  }
-};
 
 Player.prototype.setBoardLimits = function() {
   var pos = {
@@ -110,16 +100,24 @@ Player.prototype.draw = function() {
 };
 
 Player.prototype.eatSnack = function(snack, playerIndex) {
-  if (this._life <= MAX_LIFE) {
+  var exists = 0;  
+  this._strength = this._life * 1.5;
+
+  if (this._life <= MAX_SIZE) {
     this._life += snack._energy;
-    console.log(this._life);
+    var skillIndex = Math.floor(this._life / 50);
+    for(var i = 0; i < this._skill.length ; i++){
+      if(this._skill[i].skillName.indexOf(SKILL_SET[skillIndex].skillName) != -1){
+        exists++;
+      }
+    }
+    if(this._life > 50 &&  exists == 0){
+      this._skill.push(SKILL_SET[skillIndex]);
+    }
   }
-  this._game._score[playerIndex] += snack._energy;
-  console.log(this._game._score[playerIndex]);
+  this._score += snack._energy;
 };
 
-Player.prototype.savePlayerData = function() {};
+Player.prototype.activateSkill = function(){
 
-Player.prototype.score = function() {};
-
-Player.prototype.rotatingAttack = function() {};
+};

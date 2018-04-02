@@ -2,14 +2,16 @@ function Game(boardName) {
   this._board = document.getElementById(boardName);
   this._ctx = this._board.getContext("2d");
   this._score = [0, 0];
-  this._player = [new Player(this), new Player(this)];
+  this._player = [
+    new Player(this, PLAYER1_SHIFT_X, PLAYER1_SHIFT_Y),
+    new Player(this, PLAYER2_SHIFT_X, PLAYER2_SHIFT_Y)
+  ];
   this._food = [];
   this._enemies = [];
   this._currentPositions = [];
 }
 
 Game.prototype.startGame = function() {
-
   this.addPlayers();
 
   this.interval = setInterval(
@@ -23,14 +25,17 @@ Game.prototype.startGame = function() {
     }.bind(this),
     TIME_DELTA
   );
-  //this.stopGame();
+  this.stopGame();
 };
 
 Game.prototype.stopGame = function() {
-  setTimeout(function() {
-    clearInterval(this.interval);
-    this._gameStarted = false;
-  }.bind(this), 4000);
+  setTimeout(
+    function() {
+      clearInterval(this.interval);
+      this._gameStarted = false;
+    }.bind(this),
+    120000
+  );
 };
 
 Game.prototype.clear = function() {
@@ -40,8 +45,8 @@ Game.prototype.clear = function() {
 Game.prototype.addEnemies = function() {
   if (this._enemies.length < ENEMIES_QTY) {
     var enemy = new Enemy(this);
-      this._enemies.push(enemy);
-      this.addEnemies();
+    this._enemies.push(enemy);
+    this.addEnemies();
   }
 };
 
@@ -59,10 +64,11 @@ Game.prototype.addPlayers = function() {
   this._player[0]._id = 1;
   this._player[0]._name = $("#input-player-1").val();
   this._player[0]._score = initialScore;
-
+  
   this._player[1]._id = 2;
   this._player[1]._name = $("#input-player-2").val();
   this._player[1]._score = initialScore;
+
 };
 
 Game.prototype.move = function() {
@@ -83,12 +89,10 @@ Game.prototype.update = function() {
   }
 
   this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
-  this._player[0].setActiveSkill();
   this._player[0].updatePosition();
   this._player[0].draw();
 
   this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
-  this._player[1].setActiveSkill();
   this._player[1].updatePosition();
   this._player[1].draw();
 
@@ -140,5 +144,3 @@ Game.prototype.checkCollisions = function() {
     }
   }
 };
-
-Game.prototype.savePlayerData = function() {};
