@@ -6,17 +6,18 @@ function Game(boardName) {
   this._player = [new Player(this), new Player(this)];
   this._food = [];
   this._enemies = [];
+  this._currentPositions = [];
 }
 
 Game.prototype.startGame = function() {
   this._gameStarted = true;
 
   this.addPlayers();
-  this.addFood();
 
   this.interval = setInterval(
     function() {
       this.clear();
+      this.addFood();
       this.addEnemies();
       this.move();
       this.update();
@@ -35,10 +36,10 @@ Game.prototype.clear = function() {
 };
 
 Game.prototype.addEnemies = function() {
-  if (this._enemies.length < 5) {
+  if (this._enemies.length < ENEMIES_QTY) {
     this.interval = setInterval(
       function() {
-        if (this._enemies.length < 5) {
+        if (this._enemies.length < ENEMIES_QTY) {
           var enemy = new Enemy(this);
           this._enemies.push(enemy);
           this.addEnemies();
@@ -50,11 +51,17 @@ Game.prototype.addEnemies = function() {
 };
 
 Game.prototype.addFood = function() {
-  var food = new Ironsnack(this);
-  this._food.push(food);
-
-  if (this._food.length < 15) {
-    this.addFood();
+  if (this._food.length < FOOD_QTY) {
+    this.interval = setInterval(
+      function() {
+        if (this._food.length < FOOD_QTY) {
+          var food = new Ironsnack(this);
+          this._food.push(food);
+          this.addFood();
+        }
+      }.bind(this),
+      100
+    );
   }
 };
 
@@ -65,7 +72,6 @@ Game.prototype.addPlayers = function() {
   this._player[0]._name = $("#input-player-1").val();
   this._player[0]._score = initialScore;
   this._player[0].setActiveSkill();
-  debugger;
   this._player[1]._id = 2;
   this._player[1]._name = $("#input-player-2").val();
   this._player[1]._score = initialScore;
@@ -80,12 +86,7 @@ Game.prototype.move = function() {
   );
 };
 
-Game.prototype.checkCollisions = function() {};
-
-Game.prototype.savePlayerData = function() {};
-
 Game.prototype.update = function() {
-
   if (this._food.length > 0) {
     this._food.forEach(
       function(food) {
@@ -93,14 +94,14 @@ Game.prototype.update = function() {
       }.bind(this)
     );
   }
-  
+
   this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
   this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
   this._player[0].updatePosition();
   this._player[1].updatePosition();
   this._player[0].draw();
   this._player[1].draw();
-  
+
   if (this._enemies.length > 0) {
     this._enemies.forEach(
       function(enemy) {
@@ -108,5 +109,22 @@ Game.prototype.update = function() {
       }.bind(this)
     );
   }
-
 };
+
+Game.prototype.checkCollisions = function() {
+
+  var player1 = getPosition(this._player[0]);
+  var player2 = getPosition(this._player[1]);
+  //Check colisions between players
+  checkHexColision(player1, player2);
+  
+  var snack = this._food;
+  //Check colisions between player and snack
+  if(snack.length != 0){
+    for(var i = 0 ; i < snack.length ; i++){
+      checkHexColision(player1, getPosition(snack[i]));
+      checkHexColision(player2, getPosition(snack[i]));
+    }
+  }
+};
+Game.prototype.savePlayerData = function() {};

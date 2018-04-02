@@ -5,9 +5,7 @@ function Player(game) {
   this._strength = this._life * 2; //More usefull against other players and protects from other player's attacks
 
   this._diagonal = Math.floor(this._life / 2);
-  this._side = Math.sqrt(
-    Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
-  );
+  this._side = Math.sqrt(Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2));
 
   this._position_X = this._side;
   this._position_Y = this._diagonal;
@@ -18,8 +16,6 @@ function Player(game) {
   this._skill = []; //Stores one or more skills gained by eating Iron Snacks
 }
 
-Player.prototype.score = function() {};
-
 Player.prototype.setActiveSkill = function() {
   var skillIndex = Math.floor(this._score / 50);
   for (var i = 0; i <= skillIndex; i++) {
@@ -27,22 +23,25 @@ Player.prototype.setActiveSkill = function() {
   }
 };
 
-Player.prototype.getPosition = function() {
-  var x = this._position_X;
-  var y = this._position_Y;
-  var w_limit = this._game._board.width;
-  var y_limit = this._game._board.height;
-  if (x - this._side < 0) {
+Player.prototype.setBoardLimits = function() {
+  var pos = {
+    x: this._position_X,
+    y: this._position_Y,
+    w: this._game._board.width,
+    h: this._game._board.height
+  }
+  
+  if (pos.x - this._side < 0) {
     this._position_X = this._side;
     return false;
-  } else if (x + this._side > w_limit) {
-    this._position_X = w_limit - this._side;
+  } else if (pos.x + this._side > pos.w) {
+    this._position_X = pos.w - this._side;
     return false;
-  } else if (y - this._diagonal < 0) {
+  } else if (pos.y - this._diagonal < 0) {
     this._position_Y = this._diagonal;
     return false;
-  } else if (y + this._diagonal > y_limit) {
-    this._position_Y = y_limit - this._diagonal;
+  } else if (pos.y + this._diagonal > pos.h) {
+    this._position_Y = pos.h - this._diagonal;
     return false;
   } else {
     return true;
@@ -87,7 +86,7 @@ Player.prototype.setMove = function(value) {
 };
 
 Player.prototype.updatePosition = function() {
-  if (!this.getPosition()) {
+  if (!this.setBoardLimits()) {
     this._position_X += 0;
     this._position_Y += 0;
   } else {
@@ -96,10 +95,19 @@ Player.prototype.updatePosition = function() {
   }
 };
 
+Player.prototype.draw = function() {
+  drawHex(
+    this._game,
+    this._position_X,
+    this._position_Y,
+    this._side,
+    this._diagonal,
+    "#000000"
+  );
+};
+
 Player.prototype.savePlayerData = function() {};
 
-Player.prototype.draw = function() {
-  drawHex(this._game, this._position_X, this._position_Y, this._side, this._diagonal, '#000000');
-};
+Player.prototype.score = function() {};
 
 Player.prototype.rotatingAttack = function() {};

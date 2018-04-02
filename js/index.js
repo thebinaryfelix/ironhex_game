@@ -43,6 +43,9 @@ function showScore() {
 //Keyboard listeners
 document.addEventListener("keydown", function(pressedKey) {
   keys[pressedKey.keyCode] = true;
+  if(DEFAULT_KEY.indexOf(pressedKey.keyCode) != -1){
+    pressedKey.preventDefault();
+  }
 }, false)
 
 document.addEventListener("keyup", function(releasedKey) {

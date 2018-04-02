@@ -4,9 +4,7 @@ function Ironsnack(game) {
     this._energy = Math.floor(Math.random() * 20 + 5); //Random number between 10 and 15
   
     this._diagonal = this._energy;
-    this._side = Math.sqrt(
-      Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
-    );
+    this._side = Math.sqrt(Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2));
   
     this._position_X = Math.floor((Math.random() * (this._game._board.width - 2*this._side)) + this._side);
     this._position_Y = Math.floor((Math.random() * (this._game._board.height - 2*this._diagonal)) + this._side);

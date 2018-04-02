@@ -2,6 +2,9 @@
 FPS = 60;
 TIME_DELTA = 1000/FPS;
 
+//Prevent default keyboard behavior
+DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 83, 87, 90];
+
 //PLAYERS
 V_UNITS = 20; //Change characters speed here
 SPEED = V_UNITS / TIME_DELTA;
@@ -24,3 +27,6 @@ PLAYER2_CONTROLS = {
     RIGHT: 68,
     SKILL: 90
 }
+
+ENEMIES_QTY = 5;
+FOOD_QTY = 15;
