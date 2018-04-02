@@ -3,33 +3,44 @@ FPS = 60;
 TIME_DELTA = 1000 / FPS;
 
 //Prevent default keyboard behavior
-DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 83, 87, 90];
+DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
-//PLAYERS
-LIFE = 40;
+//DEFAULT VALUES FOR GAME
+ENEMIES_QTY = 1;
 ENEMY_LIFE = 50;
-MAX_LIFE = 100;
-V_UNITS = 20; //Change characters speed here
+
+LIFE = 40;
+MAX_SIZE = 150; //OF PLAYER AND ENEMIES
+
+MAX_SIZE_FOOD = 20;
+MIN_SIZE_FOOD = 5;
+FOOD_QTY = 50;
+
+V_UNITS = 90; //Change characters speed here
+
 SPEED = V_UNITS / TIME_DELTA;
 
 DIAGONAL_COS = Math.cos(Math.PI / 4); //Otherwise, speed will add up when pressing two keys at the same time.
 
 //CONTROLS
 PLAYER1_CONTROLS = {
-  LEFT: 37,
-  UP: 38,
-  RIGHT: 39,
-  DOWN: 40,
-  SKILL: 32
+  LEFT: 37,   // ARROW_LEFT
+  UP: 38,     // ARROW_UP
+  RIGHT: 39,  // ARROW_RIGHT
+  DOWN: 40,   // ARROW_DOWN
+  SKILL: 32   // SPACE_BAR
 };
 
 PLAYER2_CONTROLS = {
-  UP: 87,
-  DOWN: 83,
-  LEFT: 65,
-  RIGHT: 68,
-  SKILL: 90
+  UP: 87,     // W
+  DOWN: 83,   // S
+  LEFT: 65,   // A
+  RIGHT: 68,  // D
+  SKILL: 81   // Q
 };
 
-ENEMIES_QTY = 5;
-FOOD_QTY = 15;
+//INITIAL POSITIONS INCREMENTS
+PLAYER1_SHIFT_X = 0;
+PLAYER1_SHIFT_Y = 0;
+PLAYER2_SHIFT_X = 0;
+PLAYER2_SHIFT_Y = 80;

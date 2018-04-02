@@ -1,8 +1,9 @@
-function playerInput(keyActive, player) {
-  this._player = player;
+function playerInput(keyActive) {
+
   var playerMovement = {
     moving_X: 0,
-    moving_Y: 0
+    moving_Y: 0,
+    skill: 0
   };
   if (keys[keyActive.LEFT]) {
     playerMovement.moving_X = -1;
@@ -13,6 +14,9 @@ function playerInput(keyActive, player) {
     playerMovement.moving_Y = -1;
   } else if (keys[keyActive.DOWN]) {
     playerMovement.moving_Y = 1;
+  }
+  if(keys[keyActive.SKILL]){
+    playerMovement.skill = 1;
   }
 
   return playerMovement;

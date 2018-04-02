@@ -56,7 +56,7 @@ Enemy.prototype.draw = function() {
 };
 
 Enemy.prototype.eatSnack = function(snack) {
-  if (this._life <= MAX_LIFE) {
+  if (this._life <= MAX_SIZE) {
     this._life += snack._energy;
   }
 };
