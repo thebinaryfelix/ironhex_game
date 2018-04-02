@@ -1,11 +1,13 @@
 function Player(game) {
   this._game = game;
 
-  this._life = 40; //Increases with amount of food eaten
-  this._strength = this._life * 2; //More usefull against other players and protects from other player's attacks
+  this._life = LIFE; //Increases with amount of food eaten
+  this._strength = this._life * 1.5; //More usefull against other players and protects from other player's attacks
 
   this._diagonal = Math.floor(this._life / 2);
-  this._side = Math.sqrt(Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2));
+  this._side = Math.sqrt(
+    Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
+  );
 
   this._position_X = this._side;
   this._position_Y = this._diagonal;
@@ -29,8 +31,8 @@ Player.prototype.setBoardLimits = function() {
     y: this._position_Y,
     w: this._game._board.width,
     h: this._game._board.height
-  }
-  
+  };
+
   if (pos.x - this._side < 0) {
     this._position_X = this._side;
     return false;
@@ -102,8 +104,18 @@ Player.prototype.draw = function() {
     this._position_Y,
     this._side,
     this._diagonal,
-    "#000000"
+    "#000000",
+    this._life
   );
+};
+
+Player.prototype.eatSnack = function(snack, playerIndex) {
+  if (this._life <= MAX_LIFE) {
+    this._life += snack._energy;
+    console.log(this._life);
+  }
+  this._game._score[playerIndex] += snack._energy;
+  console.log(this._game._score[playerIndex]);
 };
 
 Player.prototype.savePlayerData = function() {};

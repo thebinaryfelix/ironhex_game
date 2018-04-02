@@ -1,11 +1,14 @@
 //ENGINE
 FPS = 60;
-TIME_DELTA = 1000/FPS;
+TIME_DELTA = 1000 / FPS;
 
 //Prevent default keyboard behavior
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 83, 87, 90];
 
 //PLAYERS
+LIFE = 40;
+ENEMY_LIFE = 50;
+MAX_LIFE = 100;
 V_UNITS = 20; //Change characters speed here
 SPEED = V_UNITS / TIME_DELTA;
 
@@ -13,20 +16,20 @@ DIAGONAL_COS = Math.cos(Math.PI / 4); //Otherwise, speed will add up when pressi
 
 //CONTROLS
 PLAYER1_CONTROLS = {
-    LEFT: 37,
-    UP: 38,
-    RIGHT: 39,
-    DOWN: 40,
-    SKILL: 32
-}
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+  SKILL: 32
+};
 
 PLAYER2_CONTROLS = {
-    UP: 87,
-    DOWN: 83,
-    LEFT: 65,
-    RIGHT: 68,
-    SKILL: 90
-}
+  UP: 87,
+  DOWN: 83,
+  LEFT: 65,
+  RIGHT: 68,
+  SKILL: 90
+};
 
 ENEMIES_QTY = 5;
 FOOD_QTY = 15;

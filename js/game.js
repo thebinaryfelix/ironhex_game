@@ -2,7 +2,7 @@ function Game(boardName) {
   this._board = document.getElementById(boardName);
   this._ctx = this._board.getContext("2d");
   this._gameStarted = false;
-  this._score = 0;
+  this._score = [0, 0];
   this._player = [new Player(this), new Player(this)];
   this._food = [];
   this._enemies = [];
@@ -20,8 +20,8 @@ Game.prototype.startGame = function() {
       this.addFood();
       this.addEnemies();
       this.move();
-      this.update();
       this.checkCollisions();
+      this.update();
     }.bind(this),
     TIME_DELTA
   );
@@ -112,18 +112,32 @@ Game.prototype.update = function() {
 };
 
 Game.prototype.checkCollisions = function() {
-
   var player1 = getPosition(this._player[0]);
   var player2 = getPosition(this._player[1]);
-  //Check colisions between players
-  checkHexColision(player1, player2);
-  
+  //Check collision between players
+  checkHexCollision(player1, player2);
+
   var snack = this._food;
-  //Check colisions between player and snack
-  if(snack.length != 0){
-    for(var i = 0 ; i < snack.length ; i++){
-      checkHexColision(player1, getPosition(snack[i]));
-      checkHexColision(player2, getPosition(snack[i]));
+  //Check collision between player and snack
+  if (snack.length != 0) {
+    for (var i = 0; i < snack.length; i++) {
+      if (checkHexCollision(player1, getPosition(snack[i]))) {
+        this._player[0].eatSnack(snack[i], 0);
+        this._food.splice(i, 1);
+      }
+      if (checkHexCollision(player2, getPosition(snack[i]))) {
+        this._player[1].eatSnack(snack[i], 1);
+        this._food.splice(i, 1);
+      }
+    }
+  }
+
+  //Check collision between player and enemies
+  var enemy = this._enemies;
+  if (enemy.length != 0) {
+    for (var i = 0; i < enemy.length; i++) {
+      checkHexCollision(player1, getPosition(enemy[i]));
+      checkHexCollision(player2, getPosition(enemy[i]));
     }
   }
 };
