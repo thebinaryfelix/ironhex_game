@@ -24,7 +24,7 @@ function loadBoard() {
 
   //Creates var iron_ballz that will store Game object
   var ironhex = new Game("main-board");
-
+  ironhex._gameStarted = true;
   ironhex.startGame();
 
   //Alert user before refreshing or closing page

@@ -1,7 +1,6 @@
 function Game(boardName) {
   this._board = document.getElementById(boardName);
   this._ctx = this._board.getContext("2d");
-  this._gameStarted = false;
   this._score = [0, 0];
   this._player = [new Player(this), new Player(this)];
   this._food = [];
@@ -10,7 +9,6 @@ function Game(boardName) {
 }
 
 Game.prototype.startGame = function() {
-  this._gameStarted = true;
 
   this.addPlayers();
 
@@ -25,10 +23,14 @@ Game.prototype.startGame = function() {
     }.bind(this),
     TIME_DELTA
   );
+  //this.stopGame();
 };
 
 Game.prototype.stopGame = function() {
-  this._gameStarted = false;
+  setTimeout(function() {
+    clearInterval(this.interval);
+    this._gameStarted = false;
+  }.bind(this), 4000);
 };
 
 Game.prototype.clear = function() {
@@ -37,31 +39,17 @@ Game.prototype.clear = function() {
 
 Game.prototype.addEnemies = function() {
   if (this._enemies.length < ENEMIES_QTY) {
-    this.interval = setInterval(
-      function() {
-        if (this._enemies.length < ENEMIES_QTY) {
-          var enemy = new Enemy(this);
-          this._enemies.push(enemy);
-          this.addEnemies();
-        }
-      }.bind(this),
-      100
-    );
+    var enemy = new Enemy(this);
+      this._enemies.push(enemy);
+      this.addEnemies();
   }
 };
 
 Game.prototype.addFood = function() {
   if (this._food.length < FOOD_QTY) {
-    this.interval = setInterval(
-      function() {
-        if (this._food.length < FOOD_QTY) {
-          var food = new Ironsnack(this);
-          this._food.push(food);
-          this.addFood();
-        }
-      }.bind(this),
-      100
-    );
+    var food = new Ironsnack(this);
+    this._food.push(food);
+    this.addFood();
   }
 };
 
@@ -75,7 +63,6 @@ Game.prototype.addPlayers = function() {
   this._player[1]._id = 2;
   this._player[1]._name = $("#input-player-2").val();
   this._player[1]._score = initialScore;
-  
 };
 
 Game.prototype.move = function() {
@@ -123,7 +110,7 @@ Game.prototype.checkCollisions = function() {
 
   var snack = this._food;
   var enemy = this._enemies;
-  
+
   //Check collision between player and snack
   if (snack.length != 0) {
     for (var i = 0; i < snack.length; i++) {
@@ -137,7 +124,7 @@ Game.prototype.checkCollisions = function() {
       }
     }
   }
-  
+
   if (enemy.length != 0) {
     for (var i = 0; i < enemy.length; i++) {
       checkHexCollision(player1, getPosition(enemy[i]));
@@ -152,7 +139,6 @@ Game.prototype.checkCollisions = function() {
       }
     }
   }
-  
-}
+};
 
 Game.prototype.savePlayerData = function() {};
