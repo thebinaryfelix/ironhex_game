@@ -33,10 +33,10 @@ Game.prototype.gameOver = function(player){
   this._gameStarted = false;
 
   if(player._id == 1){
-    alert("");
+    alert("Player 2 is the winner!");
   }
   else{
-    alert("");
+    alert("Player 1 is the winner!");
   }
 };
 
