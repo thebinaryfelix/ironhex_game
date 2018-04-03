@@ -2,7 +2,7 @@
 FPS = 60;
 TIME_DELTA = 1000 / FPS;
 
-TIME_GAME_OVER = 0; //In seconds. 0 for cancel.
+TIME_GAME_OVER = 120; //In seconds. 0 for cancel.
 ENEMY_TIME_SPAN = 5;
 FOOD_TIME_SPAN = 5;
 
@@ -10,7 +10,7 @@ FOOD_TIME_SPAN = 5;
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
 //DEFAULT VALUES
-ENEMIES_QTY = 0;
+ENEMIES_QTY = 14;
 FOOD_QTY = 25;
 
 ENEMY_LIFE = 55;
