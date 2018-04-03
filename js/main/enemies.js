@@ -10,7 +10,7 @@ function Enemy(game) {
   );
 
   this._position_X = Math.floor(
-    Math.random() * (this._game._board.width - 2 * this._side) + this._side
+   Math.random()* Math.random() * (this._game._board.width - 2 * this._side) + this._side
   );
   this._position_Y = Math.floor(
     Math.random() * (this._game._board.height - 2 * this._diagonal) +
@@ -19,6 +19,8 @@ function Enemy(game) {
 
   this._velocity_X = 1;
   this._velocity_Y = 1;
+
+  this._receiveDamage = true;
 }
 
 Enemy.prototype.move = function() {

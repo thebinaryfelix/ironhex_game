@@ -13,7 +13,11 @@ $(function() {
     //Uncoment lines below when game ready to play
     if ($("#input-player-1").val() == "" || $("#input-player-2").val() == "") {
       alert("HOHOHO! You must have a name, dear youngling!");
-    } else {
+    } else if($("#input-player-1").val() == $("#input-player-2").val()){
+      alert("WOW! You shouldn't play with yourself :( It's so saaaad");
+    }
+    else
+    {
       loadBoard();
     }
   });

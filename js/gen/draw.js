@@ -1,5 +1,4 @@
 function drawHex(game, x, y, side, diagonal, color, life) {
-  debugger;
   this._game = game;
   this._game._ctx.beginPath();
   this._game._ctx.fillStyle = color;

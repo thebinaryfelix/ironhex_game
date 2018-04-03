@@ -47,16 +47,20 @@
         </div>
     </div>
 
-    <canvas id="main-board" class="board-game position-absolute hidden"></canvas>
+    <canvas id="main-board" class="board-game position-absolute"></canvas>
+        <div id="score" class="container">
+            <div id="score-p1" class="score col-sm-6">
+                <h4 id="score-p1-name">Score Player 1</h4>
+                <p id="score-p1-text">0</p>
+                <p id="skill-p1">Active Skill: <span></span></p>
+            </div>
+            <div id="score-p2" class="score col-sm-6">
+                <h4 id="score-p2-name">Score Player 2</h4>
+                <p id="score-p2-text">0</p>
+                <p id="skill-p2">Active Skill: <span></span></p>
+            </div>
+        </div>
 
-    <div id="score" class="container hidden btest">
-        <div id="score-p1" class="score col-sm-6 btest">
-            <h3>Score Player 1</h3>
-        </div>
-        <div id="score-p2" class="score col-sm-6 btest">
-            <h3>Score Player 2</h3>
-        </div>
-    </div>
 
     <script src="js/config.js"></script>
     <script src="js/gen/skills.js"></script>

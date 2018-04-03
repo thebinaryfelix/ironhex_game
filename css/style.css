@@ -9,8 +9,8 @@
 
 body {
   background-color: #b6b6b6 !important;
-  background-image: url("../img/bg_overlay.png");
-  background-repeat: no-repeat;
+/*   background-image: url("../img/bg_overlay.png");
+  background-repeat: no-repeat; */
 }
 
 h1 {
@@ -57,4 +57,9 @@ h2 {
 
 .board-game {
   position: absolute;
+}
+
+.score{
+  background-color: #f7f7f769;
+  color: rgb(43, 43, 43);
 }

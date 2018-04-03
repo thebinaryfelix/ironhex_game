@@ -10,6 +10,8 @@ function Player(game, INITIAL_X_INCREMENT, INITIAL_Y_INCREMENT) {
   this._direction_Y = 0;
 
   this._skill = []; //Stores one or more skills gained by eating Iron Snacks
+
+  this._receiveDamage = true;
 }
 
 Player.prototype.setBoardLimits = function() {

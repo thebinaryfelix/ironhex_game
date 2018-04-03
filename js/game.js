@@ -33,6 +33,8 @@ Game.prototype.startGame = function() {
 };
 
 Game.prototype.gameOver = function(name) {
+
+  debugger;
   clearInterval(this.interval);
   this._gameStarted = false;
   alert(name + "  is the winner!");
@@ -46,6 +48,16 @@ Game.prototype.stopGame = function() {
       function() {
         clearInterval(this.interval);
         this._gameStarted = false;
+        debugger;
+        if(this._player[0]._score > this._player[1]._score){
+          this.gameOver(this._player[0]._name);
+        }
+        else if(this._player[0]._score < this._player[1]._score){
+         this.gameOver(this._player[1]._name);
+        }
+        else{
+          alert("Incredible! Both survived!");
+        }
       }.bind(this),
       TIME_GAME_OVER * 1000
     );
@@ -77,9 +89,11 @@ Game.prototype.addPlayers = function() {
 
   this._player[0]._name = $("#input-player-1").val();
   this._player[0]._score = initialScore;
+  $("#score-p1-name").text("Score " + this._player[0]._name);
 
   this._player[1]._name = $("#input-player-2").val();
   this._player[1]._score = initialScore;
+  $("#score-p2-name").text("Score " + this._player[1]._name);
 };
 
 Game.prototype.move = function() {
@@ -113,6 +127,11 @@ Game.prototype.update = function() {
   this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
   this._player[1].updatePosition();
   this._player[1].draw();
+
+  var scoreP1 = ""+this._player[0]._score;
+  var scoreP2 = ""+this._player[1]._score;
+  $("#score-p1-text").text(scoreP1);
+  $("#score-p2-text").text(scoreP2);
 };
 
 Game.prototype.checkCollisions = function() {
