@@ -1,8 +1,5 @@
 function drawHex(game, x, y, side, diagonal, color, life) {
-  
-  diagonal = Math.floor(life / 2);
-  side = Math.sqrt(Math.pow(diagonal, 2) - Math.pow(diagonal / 2, 2));
-
+  debugger;
   this._game = game;
   this._game._ctx.beginPath();
   this._game._ctx.fillStyle = color;

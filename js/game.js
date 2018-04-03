@@ -28,16 +28,11 @@ Game.prototype.startGame = function() {
   this.stopGame();
 };
 
-Game.prototype.gameOver = function(player){
+Game.prototype.gameOver = function(loser, winner){
+  debugger;
   clearInterval(this.interval);
   this._gameStarted = false;
-
-  if(player._id == 1){
-    alert("Player 2 is the winner!");
-  }
-  else{
-    alert("Player 1 is the winner!");
-  }
+  alert(winner._name + "  is the winner!");
 };
 
 Game.prototype.stopGame = function() {
@@ -140,6 +135,7 @@ Game.prototype.checkCollisions = function() {
       }
     }
   }
+
   var enemyAttack = 0;
 
   if (enemy.length != 0) {
@@ -147,7 +143,7 @@ Game.prototype.checkCollisions = function() {
       if (checkHexCollision(getPosition(player1), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player1, enemy[i]);
         if(enemyAttack == 1){
-          this.gameOver(player1);
+          this.gameOver(player1, player2);
         }
         else if(enemyAttack == 2){
           enemy.splice(i, 1);
@@ -156,7 +152,7 @@ Game.prototype.checkCollisions = function() {
       if (checkHexCollision(getPosition(player2), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player2, enemy[i]);
         if(enemyAttack == 1){
-          this.gameOver(player2);
+          this.gameOver(player2, player1);
         }
         else if(enemyAttack == 2){
           enemy.splice(i, 1);

@@ -2,13 +2,9 @@ function Player(game, INITIAL_X_INCREMENT, INITIAL_Y_INCREMENT) {
   this._game = game;
   this._life = LIFE;
   this._strength = 0;
-  this._diagonal = Math.floor(this._life / 2);
-  this._side = Math.sqrt(
-    Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
-  );
 
-  this._position_X = this._side + INITIAL_X_INCREMENT;
-  this._position_Y = this._diagonal + INITIAL_Y_INCREMENT;
+  this._position_X = 0;
+  this._position_Y = 0;
 
   this._direction_X = 0;
   this._direction_Y = 0;
@@ -97,6 +93,12 @@ Player.prototype.updatePosition = function() {
 };
 
 Player.prototype.draw = function() {
+  
+  this._diagonal = Math.floor(this._life / 2);
+  this._side = Math.floor(Math.sqrt(
+    Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2))
+  );
+
   drawHex(
     this._game,
     this._position_X,
@@ -106,6 +108,7 @@ Player.prototype.draw = function() {
     "#000000",
     this._life
   );
+  
 };
 
 Player.prototype.eatSnack = function(snack, playerIndex) {
@@ -128,7 +131,6 @@ Player.prototype.eatSnack = function(snack, playerIndex) {
     }
   }
   this._score += snack._energy;
-  console.log(this._strength);
 };
 
 Player.prototype.activateSkill = function() {

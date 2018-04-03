@@ -10,18 +10,18 @@ FOOD_TIME_SPAN = 5;
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
 //DEFAULT VALUES
-ENEMIES_QTY = 8;
-FOOD_QTY = 40;
+ENEMIES_QTY = 13;
+FOOD_QTY = 25;
 
 ENEMY_LIFE = 65;
 LIFE = 30;
 
-MAX_SIZE = 150; //For the player cell
+MAX_SIZE = 100; //For the player cell
 MAX_SIZE_FOOD = 20;
 MIN_SIZE_FOOD = 5;
 
 //=====================PLAYERS SPEED
-V_UNITS = 20;
+V_UNITS = 50;
 SPEED = V_UNITS / TIME_DELTA;
 DIAGONAL_COS = Math.cos(Math.PI / 4); // ==> Otherwise, speed adds up when on diagonal movement.
 

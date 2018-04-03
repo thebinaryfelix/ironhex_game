@@ -40,6 +40,12 @@ Enemy.prototype.move = function() {
 };
 
 Enemy.prototype.draw = function() {
+
+  this._diagonal = Math.floor(this._life / 2);
+  this._side = Math.sqrt(
+    Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
+  );
+
   drawHex(
     this._game,
     this._position_X,
@@ -55,6 +61,5 @@ Enemy.prototype.eatSnack = function(snack) {
   if (this._life <= MAX_SIZE) {
     this._life += snack._energy;
     this._strength = this._life * 1.5;
-    console.log(this._strength);
   }
 };

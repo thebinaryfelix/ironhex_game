@@ -1,14 +1,22 @@
 SKILL_SET = [
   {
-    //Gained after eating 50 points in Iron Snacks
     skillName: "None",
     receiveDamage: true,
     action: function(player){
-      console.log("Helix activated");
+      console.log("None");
     }
   },
   {
-    //Gained after eating 50 points in Iron Snacks
+    skillName: "SpeedUp",
+    receiveDamage: true,
+    timeSpan: 5000,
+    speed: 3,
+    action: function(player){
+      console.log("SpeedUp activated");
+    }
+  },
+  {
+    //Rotating blade
     skillName: "Helix",
     receiveDamage: true,
     timeSpan: 5000,
@@ -18,7 +26,6 @@ SKILL_SET = [
     }
   },
   {
-    //Gained after eating 100 points in Iron Snacks
     skillName: "Iron Immunity",
     receiveDamage: false,
     timeSpan: 3000,
