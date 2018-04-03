@@ -17,11 +17,6 @@ $(function() {
       loadBoard();
     }
   });
-
-  //Show players name and score on landing page
-  $("#btn-show-score").click(function() {
-    showScore();
-  });
 });
 
 function loadBoard() {

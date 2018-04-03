@@ -12,7 +12,7 @@ function getPosition(obj) {
 }
 
 function checkHexCollision(obj1, obj2) {
-  if (Math.abs(obj1.pos_X - obj2.pos_X) <= obj1.side + obj2.side && Math.abs(obj1.pos_Y - obj2.pos_Y) <= obj1.diagonal + obj2.diagonal) {
+  if (Math.abs(obj1.pos_X - obj2.pos_X) <= (obj1.side + obj2.side - 5) && Math.abs(obj1.pos_Y - obj2.pos_Y) <= (obj1.diagonal + obj2.diagonal - 5)) {
     return true;
   } 
   else {

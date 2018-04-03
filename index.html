@@ -19,7 +19,7 @@
 
 <body>
     <div class="landing-page">
-        <header>
+        <header class="main-title container-fluid">
             <div class="col col-md-8 col-md-offset-2">
                 <h1>IronHex</h1>
             </div>
@@ -43,12 +43,11 @@
                     </form>
                 </div>
                 <button type="button" class="btn col-sm-4 col-sm-offset-4 btn-success" id="btn-start">Start</button>
-                <button type="button" class="hidden btn col-sm-4 col-sm-offset-4 btn-primary" id="btn-show-score">Show score</button>
             </div>
         </div>
     </div>
     
-    <canvas id="main-board" class="board-game position-absolute hidden btest" width="1350" height="640"></canvas>
+    <canvas id="main-board" class="board-game position-absolute hidden"></canvas>
 
     <div id="score" class="container hidden btest">
         <div id="score-p1" class="score col-sm-6 btest"><h3>Score Player 1</h3></div>

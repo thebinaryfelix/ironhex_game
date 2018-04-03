@@ -3,8 +3,8 @@ function Player(game, INITIAL_X_INCREMENT, INITIAL_Y_INCREMENT) {
   this._life = LIFE;
   this._strength = 0;
 
-  this._position_X = 0;
-  this._position_Y = 0;
+  this._position_X = 0 + INITIAL_X_INCREMENT;
+  this._position_Y = 0 + INITIAL_Y_INCREMENT;
 
   this._direction_X = 0;
   this._direction_Y = 0;

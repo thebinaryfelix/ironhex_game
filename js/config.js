@@ -10,7 +10,7 @@ FOOD_TIME_SPAN = 5;
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
 //DEFAULT VALUES
-ENEMIES_QTY = 13;
+ENEMIES_QTY = 14;
 FOOD_QTY = 25;
 
 ENEMY_LIFE = 65;
@@ -21,7 +21,7 @@ MAX_SIZE_FOOD = 20;
 MIN_SIZE_FOOD = 5;
 
 //=====================PLAYERS SPEED
-V_UNITS = 50;
+V_UNITS = 40;
 SPEED = V_UNITS / TIME_DELTA;
 DIAGONAL_COS = Math.cos(Math.PI / 4); // ==> Otherwise, speed adds up when on diagonal movement.
 
@@ -46,4 +46,4 @@ PLAYER2_CONTROLS = {
 PLAYER1_SHIFT_X = 0; //---Change
 PLAYER1_SHIFT_Y = 0; //----Player
 PLAYER2_SHIFT_X = 0; //-----Initial
-PLAYER2_SHIFT_Y = 80; //------Position
+PLAYER2_SHIFT_Y = 550; //------Position

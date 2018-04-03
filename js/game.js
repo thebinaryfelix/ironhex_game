@@ -1,5 +1,7 @@
 function Game(boardName) {
   this._board = document.getElementById(boardName);
+  this._board.width =  window.innerWidth;
+  this._board.height =  window.innerHeight;
   this._ctx = this._board.getContext("2d");
   this._score = [0, 0];
   this._player = [
@@ -28,11 +30,10 @@ Game.prototype.startGame = function() {
   this.stopGame();
 };
 
-Game.prototype.gameOver = function(loser, winner){
-  debugger;
+Game.prototype.gameOver = function(name){
   clearInterval(this.interval);
   this._gameStarted = false;
-  alert(winner._name + "  is the winner!");
+  alert(name + "  is the winner!");
 };
 
 Game.prototype.stopGame = function() {
@@ -72,11 +73,9 @@ Game.prototype.addFood = function() {
 Game.prototype.addPlayers = function() {
   var initialScore = 0;
 
-  this._player[0]._id = 1;
   this._player[0]._name = $("#input-player-1").val();
   this._player[0]._score = initialScore;
 
-  this._player[1]._id = 2;
   this._player[1]._name = $("#input-player-2").val();
   this._player[1]._score = initialScore;
 };
@@ -135,15 +134,13 @@ Game.prototype.checkCollisions = function() {
       }
     }
   }
-
   var enemyAttack = 0;
-
   if (enemy.length != 0) {
     for (var i = 0; i < enemy.length; i++) {
       if (checkHexCollision(getPosition(player1), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player1, enemy[i]);
         if(enemyAttack == 1){
-          this.gameOver(player1, player2);
+          this.gameOver(player2._name);
         }
         else if(enemyAttack == 2){
           enemy.splice(i, 1);
@@ -152,7 +149,7 @@ Game.prototype.checkCollisions = function() {
       if (checkHexCollision(getPosition(player2), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player2, enemy[i]);
         if(enemyAttack == 1){
-          this.gameOver(player2, player1);
+          this.gameOver(player1._name);
         }
         else if(enemyAttack == 2){
           enemy.splice(i, 1);
@@ -168,4 +165,16 @@ Game.prototype.checkCollisions = function() {
       }
     }
   }
+
+  var playerAttack = 0;
+
+      if (checkHexCollision(getPosition(player1), getPosition(player2))) {
+        playerAttack = receiveDamage(player1, player2);
+        if(playerAttack == 1){
+          this.gameOver(player2._name);
+        }
+        else if(playerAttack == 2){
+          this.gameOver(player1._name);
+        }
+      }
 };
