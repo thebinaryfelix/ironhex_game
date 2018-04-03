@@ -42,7 +42,7 @@ Player.prototype.setBoardLimits = function() {
 };
 
 Player.prototype.setMove = function(value) {
-  if(value.skill == true){
+  if (value.skill == true) {
     this.activateSkill();
   }
   if (value.moving_X == -1) {
@@ -93,10 +93,9 @@ Player.prototype.updatePosition = function() {
 };
 
 Player.prototype.draw = function() {
-  
   this._diagonal = Math.floor(this._life / 2);
-  this._side = Math.floor(Math.sqrt(
-    Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2))
+  this._side = Math.floor(
+    Math.sqrt(Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2))
   );
 
   drawHex(
@@ -108,7 +107,6 @@ Player.prototype.draw = function() {
     "#000000",
     this._life
   );
-  
 };
 
 Player.prototype.eatSnack = function(snack, playerIndex) {

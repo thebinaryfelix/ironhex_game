@@ -12,26 +12,26 @@ function getPosition(obj) {
 }
 
 function checkHexCollision(obj1, obj2) {
-  if (Math.abs(obj1.pos_X - obj2.pos_X) <= (obj1.side + obj2.side - 5) && Math.abs(obj1.pos_Y - obj2.pos_Y) <= (obj1.diagonal + obj2.diagonal - 5)) {
+  if (
+    Math.abs(obj1.pos_X - obj2.pos_X) <= obj1.side + obj2.side - 5 &&
+    Math.abs(obj1.pos_Y - obj2.pos_Y) <= obj1.diagonal + obj2.diagonal - 5
+  ) {
     return true;
-  } 
-  else {
+  } else {
     return false;
   }
 }
 
-function receiveDamage(obj1, obj2){
-
-  if(obj1._strength < obj2._strength && obj1._life > 0){
+function receiveDamage(obj1, obj2) {
+  if (obj1._strength < obj2._strength && obj1._life > 0) {
     obj1._life -= obj2._strength / 100;
-    if(obj1._life <= 0){
+    if (obj1._life <= 0) {
       return 1;
     }
     return 0;
-  }
-  else if(obj1._strength > obj2._strength && obj2._life > 0){
+  } else if (obj1._strength > obj2._strength && obj2._life > 0) {
     obj2._life -= obj1._strength / 100;
-    if(obj2._life <= 0){
+    if (obj2._life <= 0) {
       return 2;
     }
     return 0;

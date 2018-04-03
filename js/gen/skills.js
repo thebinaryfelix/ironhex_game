@@ -2,7 +2,7 @@ SKILL_SET = [
   {
     skillName: "None",
     receiveDamage: true,
-    action: function(player){
+    action: function(player) {
       console.log("None");
     }
   },
@@ -11,7 +11,7 @@ SKILL_SET = [
     receiveDamage: true,
     timeSpan: 5000,
     speed: 3,
-    action: function(player){
+    action: function(player) {
       console.log("SpeedUp activated");
     }
   },
@@ -21,7 +21,7 @@ SKILL_SET = [
     receiveDamage: true,
     timeSpan: 5000,
     strength: 3,
-    action: function(player){
+    action: function(player) {
       console.log("Helix activated");
     }
   },
@@ -29,7 +29,7 @@ SKILL_SET = [
     skillName: "Iron Immunity",
     receiveDamage: false,
     timeSpan: 3000,
-    action: function(player){
+    action: function(player) {
       console.log("Iron Immunity activated");
     }
   }

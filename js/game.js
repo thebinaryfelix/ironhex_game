@@ -1,7 +1,7 @@
 function Game(boardName) {
   this._board = document.getElementById(boardName);
-  this._board.width =  window.innerWidth;
-  this._board.height =  window.innerHeight;
+  this._board.width = window.innerWidth;
+  this._board.height = window.innerHeight;
   this._ctx = this._board.getContext("2d");
   this._score = [0, 0];
   this._player = [
@@ -15,6 +15,8 @@ function Game(boardName) {
 
 Game.prototype.startGame = function() {
   this.addPlayers();
+
+  this._gameStarted = true;
 
   this.interval = setInterval(
     function() {
@@ -30,7 +32,7 @@ Game.prototype.startGame = function() {
   this.stopGame();
 };
 
-Game.prototype.gameOver = function(name){
+Game.prototype.gameOver = function(name) {
   clearInterval(this.interval);
   this._gameStarted = false;
   alert(name + "  is the winner!");
@@ -89,7 +91,6 @@ Game.prototype.move = function() {
 };
 
 Game.prototype.update = function() {
-  
   if (this._food.length > 0) {
     this._food.forEach(
       function(food) {
@@ -105,19 +106,18 @@ Game.prototype.update = function() {
       }.bind(this)
     );
   }
-  
+
   this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
   this._player[0].updatePosition();
   this._player[0].draw();
   this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
   this._player[1].updatePosition();
   this._player[1].draw();
-
 };
 
 Game.prototype.checkCollisions = function() {
   var player1 = this._player[0];
-  var player2 = this._player[1]; 
+  var player2 = this._player[1];
   var snack = this._food;
   var enemy = this._enemies;
 
@@ -139,19 +139,17 @@ Game.prototype.checkCollisions = function() {
     for (var i = 0; i < enemy.length; i++) {
       if (checkHexCollision(getPosition(player1), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player1, enemy[i]);
-        if(enemyAttack == 1){
+        if (enemyAttack == 1) {
           this.gameOver(player2._name);
-        }
-        else if(enemyAttack == 2){
+        } else if (enemyAttack == 2) {
           enemy.splice(i, 1);
         }
       }
       if (checkHexCollision(getPosition(player2), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player2, enemy[i]);
-        if(enemyAttack == 1){
+        if (enemyAttack == 1) {
           this.gameOver(player1._name);
-        }
-        else if(enemyAttack == 2){
+        } else if (enemyAttack == 2) {
           enemy.splice(i, 1);
         }
       }
@@ -168,13 +166,12 @@ Game.prototype.checkCollisions = function() {
 
   var playerAttack = 0;
 
-      if (checkHexCollision(getPosition(player1), getPosition(player2))) {
-        playerAttack = receiveDamage(player1, player2);
-        if(playerAttack == 1){
-          this.gameOver(player2._name);
-        }
-        else if(playerAttack == 2){
-          this.gameOver(player1._name);
-        }
-      }
+  if (checkHexCollision(getPosition(player1), getPosition(player2))) {
+    playerAttack = receiveDamage(player1, player2);
+    if (playerAttack == 1) {
+      this.gameOver(player2._name);
+    } else if (playerAttack == 2) {
+      this.gameOver(player1._name);
+    }
+  }
 };

@@ -7,7 +7,7 @@
   padding: 0;
 }
 
-body{
+body {
   background-color: #b6b6b6 !important;
   background-image: url("../img/bg_overlay.png");
   background-repeat: no-repeat;
@@ -24,11 +24,11 @@ h2 {
   text-shadow: 1px 2px 1px rgba(255, 255, 255, 0.062) !important;
 }
 
-#score-p2{
+#score-p2 {
   text-align: right;
 }
 
-.form-control{
+.form-control {
   background-color: rgb(29, 29, 29) !important;
   border: 1px solid #0e0e0e !important;
 }
@@ -50,11 +50,11 @@ h2 {
   margin-top: 10px;
 }
 
-.hidden{
-    display: none;
-    z-index: -1;
-} 
+.hidden {
+  display: none;
+  z-index: -1;
+}
 
-.board-game{
+.board-game {
   position: absolute;
 }

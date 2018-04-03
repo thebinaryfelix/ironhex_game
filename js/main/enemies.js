@@ -24,7 +24,7 @@ function Enemy(game) {
 Enemy.prototype.move = function() {
   this._position_X += this._velocity_X;
   this._position_Y += this._velocity_Y;
-  
+
   if (
     this._position_X - this._side <= 0 ||
     this._position_X + this._side >= this._game._board.width
@@ -40,7 +40,6 @@ Enemy.prototype.move = function() {
 };
 
 Enemy.prototype.draw = function() {
-
   this._diagonal = Math.floor(this._life / 2);
   this._side = Math.sqrt(
     Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)

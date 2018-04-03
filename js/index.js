@@ -23,6 +23,7 @@ function loadBoard() {
   $(".landing-page").fadeOut(300);
   setTimeout(function() {
     $(".board-game").fadeIn(1000);
+    $("#score").fadeIn(1000);
   }, 400);
 
   //Creates var iron_ballz that will store Game object
@@ -32,7 +33,7 @@ function loadBoard() {
   //Alert user before refreshing or closing page
   //Uncoment lines below when game ready to play
   window.onbeforeunload = function() {
-    if (iron_ballz._gameStarted) {
+    if (ironhex._gameStarted) {
       return true;
     }
   };
