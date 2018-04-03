@@ -48,16 +48,21 @@
         </div>
     </div>
     
-    <canvas id="main-board" class="board-game hidden" width="1200" height="600"></canvas>
+    <canvas id="main-board" class="board-game position-absolute hidden btest" width="1350" height="640"></canvas>
 
+    <div id="score" class="container hidden btest">
+        <div id="score-p1" class="score col-sm-6 btest"><h3>Score Player 1</h3></div>
+        <div id="score-p2" class="score col-sm-6 btest"><h3>Score Player 2</h3></div>  
+    </div>  
+    
     <script src="js/config.js"></script>
-    <script src="js/skills.js"></script>
+    <script src="js/gen/skills.js"></script>
     <script src="js/input.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/enemies.js"></script>
-    <script src="js/food.js"></script>
-    <script src="js/movement.js"></script>
-    <script src="js/draw.js"></script>
+    <script src="js/main/player.js"></script>
+    <script src="js/main/enemies.js"></script>
+    <script src="js/main/food.js"></script>
+    <script src="js/gen/movement.js"></script>
+    <script src="js/gen/draw.js"></script>
     <script src="js/game.js"></script>
     <script src="js/index.js"></script>
 </body>

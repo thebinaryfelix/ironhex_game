@@ -1,10 +1,8 @@
 function Enemy(game) {
   this._game = game;
 
-  this._life = ENEMY_LIFE; //Increases with amount of food eaten
-  this._strength = this._life * 2; //More usefull against other players and protects from other player's attacks
-
-  /*   this._radius = Math.floor(this._life/4); */
+  this._life = ENEMY_LIFE;
+  this._strength = 0;
 
   this._diagonal = Math.floor(this._life / 2);
   this._side = Math.sqrt(
@@ -23,12 +21,10 @@ function Enemy(game) {
   this._velocity_Y = 1;
 }
 
-Enemy.prototype.receiveDamage = function() {};
-
 Enemy.prototype.move = function() {
   this._position_X += this._velocity_X;
   this._position_Y += this._velocity_Y;
-
+  
   if (
     this._position_X - this._side <= 0 ||
     this._position_X + this._side >= this._game._board.width
@@ -58,5 +54,7 @@ Enemy.prototype.draw = function() {
 Enemy.prototype.eatSnack = function(snack) {
   if (this._life <= MAX_SIZE) {
     this._life += snack._energy;
+    this._strength = this._life * 1.5;
+    console.log(this._strength);
   }
 };

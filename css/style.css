@@ -1,5 +1,5 @@
 .btest {
-  border: 5px solid rgb(41, 41, 41);
+  border: 1px solid rgb(247, 0, 0);
 }
 
 * {
@@ -7,13 +7,30 @@
   padding: 0;
 }
 
+body{
+  background-color: #b6b6b6 !important;
+  background-image: url("../img/bg_overlay.png");
+  background-repeat: no-repeat;
+}
+
 h1 {
   text-align: center;
+  color: #ffffff !important;
 }
 
 h2 {
   text-align: center;
-  color: #535353 !important;
+  color: rgba(0, 0, 0, 0.726) !important;
+  text-shadow: 1px 2px 1px rgba(255, 255, 255, 0.062) !important;
+}
+
+#score-p2{
+  text-align: right;
+}
+
+.form-control{
+  background-color: rgb(29, 29, 29) !important;
+  border: 1px solid #0e0e0e !important;
 }
 
 .col {
@@ -22,9 +39,10 @@ h2 {
 
 .player-area {
   margin-top: 30px;
-  background-color: #1b1b1b;
-  border-radius: 8px;
+  background-color: #222;
+  border-radius: 5px;
   padding-bottom: 20px;
+  box-shadow: 1px 1px 8px rgba(255, 255, 255, 0.062) !important;
 }
 
 .btn-success,
@@ -34,5 +52,9 @@ h2 {
 
 .hidden{
     display: none;
-    z-index: -1;;
+    z-index: -1;
+} 
+
+.board-game{
+  position: absolute;
 }

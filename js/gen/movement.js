@@ -21,3 +21,21 @@ function checkHexCollision(obj1, obj2) {
     return false;
   }
 }
+
+function receiveDamage(obj1, obj2){
+
+  if(obj1._strength < obj2._strength && obj1._life > 0){
+    obj1._life -= obj2._strength / 100;
+    if(obj1._life <= 0){
+      return 1;
+    }
+    return 0;
+  }
+  else if(obj1._strength > obj2._strength && obj2._life > 0){
+    obj2._life -= obj1._strength / 100;
+    if(obj2._life <= 0){
+      return 2;
+    }
+    return 0;
+  }
+}

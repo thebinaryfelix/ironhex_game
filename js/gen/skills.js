@@ -1,11 +1,10 @@
 SKILL_SET = [
   {
-    //Starting point
+    //Gained after eating 50 points in Iron Snacks
     skillName: "None",
     receiveDamage: true,
-    timeSpan: false,
     action: function(player){
-      console.log("You do not have any skills! Too bad :)");
+      console.log("Helix activated");
     }
   },
   {
@@ -15,7 +14,7 @@ SKILL_SET = [
     timeSpan: 5000,
     strength: 3,
     action: function(player){
-      console.log("helix activated");
+      console.log("Helix activated");
     }
   },
   {
@@ -24,8 +23,7 @@ SKILL_SET = [
     receiveDamage: false,
     timeSpan: 3000,
     action: function(player){
-      return;
+      console.log("Iron Immunity activated");
     }
   }
 ];
-

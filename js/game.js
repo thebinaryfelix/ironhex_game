@@ -20,22 +20,38 @@ Game.prototype.startGame = function() {
       this.addFood();
       this.addEnemies();
       this.move();
-      this.checkCollisions();
       this.update();
+      this.checkCollisions();
     }.bind(this),
     TIME_DELTA
   );
   this.stopGame();
 };
 
+Game.prototype.gameOver = function(player){
+  clearInterval(this.interval);
+  this._gameStarted = false;
+
+  if(player._id == 1){
+    alert("");
+  }
+  else{
+    alert("");
+  }
+};
+
 Game.prototype.stopGame = function() {
-  setTimeout(
-    function() {
-      clearInterval(this.interval);
-      this._gameStarted = false;
-    }.bind(this),
-    120000
-  );
+  if (TIME_GAME_OVER == 0) {
+    return;
+  } else {
+    setTimeout(
+      function() {
+        clearInterval(this.interval);
+        this._gameStarted = false;
+      }.bind(this),
+      TIME_GAME_OVER * 1000
+    );
+  }
 };
 
 Game.prototype.clear = function() {
@@ -64,11 +80,10 @@ Game.prototype.addPlayers = function() {
   this._player[0]._id = 1;
   this._player[0]._name = $("#input-player-1").val();
   this._player[0]._score = initialScore;
-  
+
   this._player[1]._id = 2;
   this._player[1]._name = $("#input-player-2").val();
   this._player[1]._score = initialScore;
-
 };
 
 Game.prototype.move = function() {
@@ -80,6 +95,7 @@ Game.prototype.move = function() {
 };
 
 Game.prototype.update = function() {
+  
   if (this._food.length > 0) {
     this._food.forEach(
       function(food) {
@@ -88,14 +104,6 @@ Game.prototype.update = function() {
     );
   }
 
-  this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
-  this._player[0].updatePosition();
-  this._player[0].draw();
-
-  this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
-  this._player[1].updatePosition();
-  this._player[1].draw();
-
   if (this._enemies.length > 0) {
     this._enemies.forEach(
       function(enemy) {
@@ -103,36 +111,57 @@ Game.prototype.update = function() {
       }.bind(this)
     );
   }
+  
+  this._player[0].setMove(playerInput(PLAYER1_CONTROLS));
+  this._player[0].updatePosition();
+  this._player[0].draw();
+  this._player[1].setMove(playerInput(PLAYER2_CONTROLS));
+  this._player[1].updatePosition();
+  this._player[1].draw();
+
 };
 
 Game.prototype.checkCollisions = function() {
-  var player1 = getPosition(this._player[0]);
-  var player2 = getPosition(this._player[1]);
-
-  //Check collision between players
-  checkHexCollision(player1, player2);
-
+  var player1 = this._player[0];
+  var player2 = this._player[1]; 
   var snack = this._food;
   var enemy = this._enemies;
 
   //Check collision between player and snack
   if (snack.length != 0) {
     for (var i = 0; i < snack.length; i++) {
-      if (checkHexCollision(player1, getPosition(snack[i]))) {
+      if (checkHexCollision(getPosition(player1), getPosition(snack[i]))) {
         this._player[0].eatSnack(snack[i], 0);
         this._food.splice(i, 1);
       }
-      if (checkHexCollision(player2, getPosition(snack[i]))) {
+      if (checkHexCollision(getPosition(player2), getPosition(snack[i]))) {
         this._player[1].eatSnack(snack[i], 1);
         this._food.splice(i, 1);
       }
     }
   }
+  var enemyAttack = 0;
 
   if (enemy.length != 0) {
     for (var i = 0; i < enemy.length; i++) {
-      checkHexCollision(player1, getPosition(enemy[i]));
-      checkHexCollision(player2, getPosition(enemy[i]));
+      if (checkHexCollision(getPosition(player1), getPosition(enemy[i]))) {
+        enemyAttack = receiveDamage(player1, enemy[i]);
+        if(enemyAttack == 1){
+          this.gameOver(player1);
+        }
+        else if(enemyAttack == 2){
+          enemy.splice(i, 1);
+        }
+      }
+      if (checkHexCollision(getPosition(player2), getPosition(enemy[i]))) {
+        enemyAttack = receiveDamage(player2, enemy[i]);
+        if(enemyAttack == 1){
+          this.gameOver(player2);
+        }
+        else if(enemyAttack == 2){
+          enemy.splice(i, 1);
+        }
+      }
       if (snack.length != 0) {
         for (var j = 0; j < snack.length; j++) {
           if (checkHexCollision(getPosition(enemy[i]), getPosition(snack[j]))) {

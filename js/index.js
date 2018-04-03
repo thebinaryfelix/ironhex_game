@@ -1,6 +1,8 @@
 var keys = {};
 
 $(function() {
+  $("#score").hide().removeClass("hidden");
+  $(".board-game").hide().removeClass("hidden");
   //Call function to load game board
   $("#btn-start").click(function() {
     //Uncoment lines below when game ready to play
@@ -19,8 +21,11 @@ $(function() {
 });
 
 function loadBoard() {
-  $(".landing-page").addClass("hidden");
-  $(".board-game").removeClass("hidden");
+  $(".landing-page").fadeOut(300);
+  setTimeout(function(){
+    $(".board-game").fadeIn(1000);
+  }, 400);
+  
 
   //Creates var iron_ballz that will store Game object
   var ironhex = new Game("main-board");
@@ -33,10 +38,6 @@ function loadBoard() {
       return true;
     }
   }; */
-}
-
-function showScore() {
-  //Show score of both players...
 }
 
 //Keyboard listeners

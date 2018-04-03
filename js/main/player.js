@@ -1,6 +1,7 @@
 function Player(game, INITIAL_X_INCREMENT, INITIAL_Y_INCREMENT) {
   this._game = game;
   this._life = LIFE;
+  this._strength = 0;
   this._diagonal = Math.floor(this._life / 2);
   this._side = Math.sqrt(
     Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
@@ -25,15 +26,19 @@ Player.prototype.setBoardLimits = function() {
 
   if (pos.x - this._side < 0) {
     this._position_X = this._side;
+
     return false;
   } else if (pos.x + this._side > pos.w) {
     this._position_X = pos.w - this._side;
+
     return false;
   } else if (pos.y - this._diagonal < 0) {
     this._position_Y = this._diagonal;
+
     return false;
   } else if (pos.y + this._diagonal > pos.h) {
     this._position_Y = pos.h - this._diagonal;
+
     return false;
   } else {
     return true;
@@ -41,6 +46,9 @@ Player.prototype.setBoardLimits = function() {
 };
 
 Player.prototype.setMove = function(value) {
+  if(value.skill == true){
+    this.activateSkill();
+  }
   if (value.moving_X == -1) {
     if (value.moving_Y == -1) {
       this._direction_X = -DIAGONAL_COS;
@@ -85,6 +93,7 @@ Player.prototype.updatePosition = function() {
     this._position_X += this._direction_X * SPEED;
     this._position_Y += this._direction_Y * SPEED;
   }
+  return true;
 };
 
 Player.prototype.draw = function() {
@@ -100,24 +109,28 @@ Player.prototype.draw = function() {
 };
 
 Player.prototype.eatSnack = function(snack, playerIndex) {
-  var exists = 0;  
-  this._strength = this._life * 1.5;
+  var doubled = 0;
+  var skillIndex = Math.floor(this._life / 50);
 
   if (this._life <= MAX_SIZE) {
     this._life += snack._energy;
-    var skillIndex = Math.floor(this._life / 50);
-    for(var i = 0; i < this._skill.length ; i++){
-      if(this._skill[i].skillName.indexOf(SKILL_SET[skillIndex].skillName) != -1){
-        exists++;
+    this._strength = this._life * 1.5;
+    for (var i = 0; i < this._skill.length; i++) {
+      if (
+        this._skill[i].skillName.indexOf(SKILL_SET[skillIndex].skillName) != -1
+      ) {
+        doubled++;
       }
     }
-    if(this._life > 50 &&  exists == 0){
+
+    if (this._life > 50 && doubled == 0) {
       this._skill.push(SKILL_SET[skillIndex]);
     }
   }
   this._score += snack._energy;
+  console.log(this._strength);
 };
 
-Player.prototype.activateSkill = function(){
-
+Player.prototype.activateSkill = function() {
+  console.log("Skill key active");
 };
