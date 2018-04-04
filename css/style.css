@@ -8,7 +8,12 @@
 }
 
 body {
-  background-color: #b6b6b6 !important;
+  background-color: #0c0c0c !important;
+}
+
+li{
+  display: inline-block;
+  list-style-type: none;
 }
 
 h1 {
@@ -18,8 +23,8 @@ h1 {
 
 h2 {
   text-align: center;
-  color: rgba(0, 0, 0, 0.726) !important;
-  text-shadow: 1px 2px 1px rgba(255, 255, 255, 0.062) !important;
+  color: rgba(189, 189, 189, 0.822) !important;
+  text-shadow: 1px 2px 1px rgba(43, 43, 43, 0.527) !important;
 }
 
 #score-p2 {
@@ -57,8 +62,8 @@ h2 {
 
 .btn-danger{
   position: fixed !important;
-  top: 2.0em;
-  left: 45%;
+  top: 1.5em;
+  left: 47%;
   z-index: 10;
 }
 
@@ -72,7 +77,19 @@ h2 {
 }
 
 .score{
-  background-color: #f7f7f769;
-  color: rgb(43, 43, 43);
+  background-color: #afafaf93;
+  color: rgb(207, 207, 207);
   z-index: 9;
+}
+
+#score-p1{
+  border-radius: 10px 0 0 10px;
+}
+
+#score-p2{
+  border-radius: 0 10px 10px 0;
+}
+
+p{
+  font-size: 1.3em !important;
 }

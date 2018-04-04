@@ -97,17 +97,16 @@ Game.prototype.addFood = function() {
 };
 
 Game.prototype.addPlayers = function() {
-  var initialScore = 0;
 
-  //Show player name in DOM
-  this._player[0]._name = $("#input-player-1").val();
-  this._player[0]._score = initialScore;
   this._player[0]._skill[0] = SKILL_SET[0];
+  this._player[0]._name = $("#input-player-1").val();
+  this._player[0]._score = 0;
+  $("#score-p1-name").text(this._player[0]._name); //Show player name in DOM
 
-  //Show player name in DOM
-  this._player[1]._name = $("#input-player-2").val();
-  this._player[1]._score = initialScore;
   this._player[1]._skill[0] = SKILL_SET[0];
+  this._player[1]._name = $("#input-player-2").val();
+  this._player[1]._score = 0;
+  $("#score-p2-name").text(this._player[1]._name); //Show player name in DOM
 };
 
 Game.prototype.move = function() {
@@ -142,9 +141,15 @@ Game.prototype.update = function() {
   this._player[1].updatePosition();
   this._player[1].draw();
 
-  $("#score-p1-text").text(this._player[0]._score);
-  $("#score-p2-text").text(this._player[1]._score);
+  //Show player's score on screen
+  $("#score-p1-text").text("Score: " + this._player[0]._score);
+  $("#score-p2-text").text("Score: " + this._player[1]._score);
 
+   //Show player's life on screen
+   $("#life-p1").text("Life: " + parseInt(this._player[0]._life));
+   $("#life-p2").text("Life: " + parseInt(this._player[1]._life));
+
+  //Show player's skill on screen
   $("#skill-p1 > span").text(this._player[0].showSkill());
   $("#skill-p2 > span").text(this._player[1].showSkill());
 };

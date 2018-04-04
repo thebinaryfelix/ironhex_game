@@ -25,8 +25,8 @@ function Enemy(game) {
 }
 
 Enemy.prototype.move = function() {
-  this._position_X += this._velocity_X * (V_UNITS / (this._life + 10));
-  this._position_Y += this._velocity_Y * (V_UNITS / (this._life + 10));
+  this._position_X += this._velocity_X * (V_UNITS / (this._diagonal + 10));
+  this._position_Y += this._velocity_Y * (V_UNITS / (this._diagonal + 10));
 
   if (
     this._position_X - this._side <= 0 ||
@@ -43,7 +43,13 @@ Enemy.prototype.move = function() {
 };
 
 Enemy.prototype.draw = function() {
-  this._diagonal = Math.floor(this._life / 2);
+  var newSize = this._life;
+
+  if (newSize > MAX_SIZE_CELL) {
+    newSize = MAX_SIZE_CELL;
+  }
+
+  this._diagonal = Math.floor(newSize / 2);
   this._side = Math.sqrt(
     Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
   );
@@ -55,13 +61,11 @@ Enemy.prototype.draw = function() {
     this._side,
     this._diagonal,
     "#C40500",
-    this._life
+    newSize
   );
 };
 
 Enemy.prototype.eatSnack = function(snack) {
-  if (this._life <= MAX_LIFE) {
-    this._life += snack._energy;
-    this._strength = this._life * 1.5;
-  }
+  this._life += snack._energy;
+  this._strength = this._life * 1.5;
 };

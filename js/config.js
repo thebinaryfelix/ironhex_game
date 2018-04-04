@@ -1,10 +1,10 @@
 /* Global variables used in game. Game functions don't change these. */
 
 //======================VIDEO
-FPS = 60;
+FPS = 50;
 TIME_DELTA = 1000 / FPS;
 
-MULTIPLAYER = true; //TRUE = two players;
+MULTIPLAYER = true; //TRUE => two players | FALSE => game ends when all players die
 
 TIME_GAME_OVER = 0; //In seconds. 0 for unlimited.
 
@@ -15,23 +15,24 @@ FOOD_TIME_SPAN = 5; //Time in seconds.
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
 //DEFAULT VALUES
-ENEMIES_QTY = 0;
+ENEMIES_QTY = 5;
 FOOD_QTY = 40;
 
 ENEMY_LIFE = 45;
-LIFE = 30;
-MAX_LIFE = 100; //For the player cell
+LIFE = 40;
 
-MIN_SIZE_CELL = 27;
-MAX_SIZE_FOOD = 20;
-MIN_SIZE_FOOD = 5;
+MAX_SIZE_CELL = 100;
+MIN_SIZE_CELL = 20;
+
+MAX_SIZE_FOOD = 25;
+MIN_SIZE_FOOD = 10;
 
 //=====================PLAYERS SPEED
-V_UNITS = 50;
+V_UNITS = 40;
 SPEED = V_UNITS / TIME_DELTA;
 DIAGONAL_COS = Math.cos(Math.PI / 4); // ==> Otherwise, speed adds up when on diagonal movement.
 
-//==================== CONTROLS
+//====================CONTROLS
 PLAYER1_CONTROLS = {
   LEFT: 37, // ARROW_LEFT
   UP: 38, // ARROW_UP

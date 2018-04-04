@@ -3,6 +3,11 @@ function Player(game, INITIAL_X_INCREMENT, INITIAL_Y_INCREMENT) {
   this._life = LIFE;
   this._strength = 0;
 
+  this._diagonal = Math.floor(this._life / 2);
+  this._side = Math.sqrt(
+    Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
+  );
+
   this._position_X = 0 + INITIAL_X_INCREMENT;
   this._position_Y = 0 + INITIAL_Y_INCREMENT;
 
@@ -89,14 +94,22 @@ Player.prototype.updatePosition = function() {
     this._position_X += 0;
     this._position_Y += 0;
   } else {
-    this._position_X += this._direction_X * SPEED * (V_UNITS / (this._life + 10));
-    this._position_Y += this._direction_Y * SPEED * (V_UNITS / (this._life + 10));
+    this._position_X +=
+      this._direction_X * SPEED * (V_UNITS / (this._diagonal + 10));
+    this._position_Y +=
+      this._direction_Y * SPEED * (V_UNITS / (this._diagonal + 10));
   }
   return true;
 };
 
 Player.prototype.draw = function() {
-  this._diagonal = Math.floor(this._life / 2);
+  var newSize = this._life;
+
+  if (newSize > MAX_SIZE_CELL) {
+    newSize = MAX_SIZE_CELL;
+  }
+
+  this._diagonal = Math.floor(newSize / 2);
   this._side = Math.floor(
     Math.sqrt(Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2))
   );
@@ -107,27 +120,24 @@ Player.prototype.draw = function() {
     this._position_Y,
     this._side,
     this._diagonal,
-    "#000000",
-    this._life
+    "#ffffff",
+    newSize
   );
 };
 
 Player.prototype.eatSnack = function(snack) {
-
   //Adds snack energy to player's life and score
-  if (this._life <= MAX_LIFE) {
-    this._life += snack._energy;
-    this._strength = this._life * 1.5;
-  }
+  this._life += snack._energy;
+  this._strength = this._life * 1.5;
   this._score += snack._energy;
-  
+
   //Adds points to spend with skills.
   this._skillPoints += snack._energy;
 
   //Calculates which skill the player can receive
   var doubled = 0;
   var skillIndex = Math.floor(this._skillPoints / 50);
-  
+
   if (skillIndex < SKILL_SET.length) {
     for (var i = 0; i < this._skill.length; i++) {
       if (
@@ -137,19 +147,18 @@ Player.prototype.eatSnack = function(snack) {
       }
     }
 
-    if (this._skillPoints > 50 && doubled == 0) {
-      
+    if (this._skillPoints >= 50 && doubled == 0) {
       this._skill.push(SKILL_SET[skillIndex]);
     }
-/*     console.table(this._skill[i-1]); */
+    console.table(this._skill[i - 1]);
   }
 };
 
-Player.prototype.showSkill = function(index){
-  skillArray = this._skill.length-1;
+Player.prototype.showSkill = function(index) {
+  skillArray = this._skill.length - 1;
   return this._skill[skillArray].skillName;
 };
 
 Player.prototype.activateSkill = function() {
-  console.log("Calling the motherfucker skiiiiiill!!");
+  console.log("Calling skill");
 };
