@@ -83,13 +83,14 @@ Player.prototype.setMove = function(value) {
   }
 };
 
-Player.prototype.updatePosition = function() {
+Player.prototype.updatePosition = function() {;
+
   if (!this.setBoardLimits()) {
     this._position_X += 0;
     this._position_Y += 0;
   } else {
-    this._position_X += this._direction_X * SPEED;
-    this._position_Y += this._direction_Y * SPEED;
+    this._position_X += this._direction_X * SPEED * (50/(this._life+10));
+    this._position_Y += this._direction_Y * SPEED * (50/(this._life+10));
   }
   return true;
 };
@@ -115,7 +116,7 @@ Player.prototype.eatSnack = function(snack, playerIndex) {
   var doubled = 0;
   var skillIndex = Math.floor(this._life / 50);
 
-  if (this._life <= MAX_SIZE) {
+  if (this._life <= MAX_LIFE) {
     this._life += snack._energy;
     this._strength = this._life * 1.5;
     for (var i = 0; i < this._skill.length; i++) {
@@ -127,7 +128,7 @@ Player.prototype.eatSnack = function(snack, playerIndex) {
     }
 
     if (this._life > 50 && doubled == 0) { 
-      this._skill.push(SKILL_SET[skillIndex].imgsrc);
+      this._skill.push(SKILL_SET[skillIndex]);
     }
   }
   this._score += snack._energy;

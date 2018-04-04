@@ -49,15 +49,13 @@ function loadBoard() {
       if (DEFAULT_KEY.indexOf(pressedKey.keyCode) != -1) {
         pressedKey.preventDefault();
       }
-    },
-    false
+    }
   );
 
   document.addEventListener(
     "keyup",
     function(releasedKey) {
       keys[releasedKey.keyCode] = false;
-    },
-    false
+    }
   );
 }

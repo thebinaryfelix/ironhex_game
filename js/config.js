@@ -1,8 +1,10 @@
+/* Global variables used in game. Game functions don't change these. */
+
 //======================VIDEO
 FPS = 60;
 TIME_DELTA = 1000 / FPS;
 
-TIME_GAME_OVER = 3; //In seconds. 0 for unlimited.
+TIME_GAME_OVER = 0; //In seconds. 0 for unlimited.
 
 ENEMY_TIME_SPAN = 5;  //Time in seconds.
 FOOD_TIME_SPAN = 5;   //Time in seconds.
@@ -11,13 +13,14 @@ FOOD_TIME_SPAN = 5;   //Time in seconds.
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
 //DEFAULT VALUES
-ENEMIES_QTY = 1;
-FOOD_QTY = 25;
+ENEMIES_QTY = 5;
+FOOD_QTY = 30;
 
-ENEMY_LIFE = 55;
+ENEMY_LIFE = 45;
 LIFE = 30;
+MAX_LIFE = 100; //For the player cell
 
-MAX_SIZE = 100; //For the player cell
+MIN_SIZE_CELL = 27;
 MAX_SIZE_FOOD = 20;
 MIN_SIZE_FOOD = 5;
 

@@ -56,7 +56,7 @@ Game.prototype.stopGame = function() {
 Game.prototype.gameOver = function(name) {
   clearInterval(this.interval);
   this._gameStarted = false;
-  
+
   if(name === 0){
     alert("Incredible! Both survived!");
   }
@@ -161,10 +161,12 @@ Game.prototype.checkCollisions = function() {
     }
   }
 
-  //Check collisions between players and enemies
+  
   var enemyAttack = 0;
   if (enemy.length != 0) {
     for (var i = 0; i < enemy.length; i++) {
+
+      //Check collisions between player_1 and enemies
       if (checkHexCollision(getPosition(player1), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player1, enemy[i]);
         if (enemyAttack == 1) {
@@ -173,6 +175,8 @@ Game.prototype.checkCollisions = function() {
           enemy.splice(i, 1);
         }
       }
+
+      //Check collisions between player_2 and enemies
       if (checkHexCollision(getPosition(player2), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player2, enemy[i]);
         if (enemyAttack == 1) {

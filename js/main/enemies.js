@@ -17,15 +17,15 @@ function Enemy(game) {
       this._diagonal
   );
 
-  this._velocity_X = 1;
-  this._velocity_Y = 1;
+  this._velocity_X = SPEED;
+  this._velocity_Y = SPEED;
 
   this._receiveDamage = true;
 }
 
 Enemy.prototype.move = function() {
-  this._position_X += this._velocity_X;
-  this._position_Y += this._velocity_Y;
+  this._position_X += this._velocity_X * (50/(this._life+10));
+  this._position_Y += this._velocity_Y * (50/(this._life+10));
 
   if (
     this._position_X - this._side <= 0 ||
@@ -59,7 +59,7 @@ Enemy.prototype.draw = function() {
 };
 
 Enemy.prototype.eatSnack = function(snack) {
-  if (this._life <= MAX_SIZE) {
+  if (this._life <= MAX_LIFE) {
     this._life += snack._energy;
     this._strength = this._life * 1.5;
   }
