@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik:500,900');
+
 .btest {
   border: 1px solid rgb(247, 0, 0);
 }
@@ -7,8 +9,14 @@
   padding: 0;
 }
 
+html{
+  font-size: 62.5% !important;
+}
+
 body {
+
   background-color: #0c0c0c !important;
+
 }
 
 li{
@@ -17,13 +25,18 @@ li{
 }
 
 h1 {
+  font-family: 'Rubik', sans-serif !important;
+  font-weight: bold !important;
   text-align: center;
-  color: #ffffff !important;
+  font-size: 5.0em !important;
+  color: #202020 !important;
+  text-shadow: 1px 1px 2px rgba(245, 245, 245, 0.747) !important;
 }
 
 h2 {
+  font-family: 'Rubik', sans-serif !important; 
   text-align: center;
-  color: rgba(189, 189, 189, 0.822) !important;
+  color: rgba(3, 3, 3, 0.822) !important;
   text-shadow: 1px 2px 1px rgba(43, 43, 43, 0.527) !important;
 }
 
@@ -53,16 +66,16 @@ h2 {
   background-color: #222;
   border-radius: 5px;
   padding-bottom: 20px;
-  box-shadow: 1px 1px 8px rgba(255, 255, 255, 0.062) !important;
+  box-shadow: 1px 1px 8px rgba(245, 245, 245, 0.226) !important;
 }
 
-.btn-primary {
+.btn-success {
   margin-top: 10px;
 }
 
 .btn-danger{
   position: fixed !important;
-  top: 1.5em;
+  top: 1.9em;
   left: 47%;
   z-index: 10;
 }
