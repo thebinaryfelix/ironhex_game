@@ -1,5 +1,4 @@
 function receiveDamage(obj1, obj2) {
-  debugger;
     if (obj1._strength < obj2._strength && obj1._life > 0 && obj1._receiveDamage == true) {
       obj1._life -= obj2._strength / 100;
       if (obj1._life <= MIN_SIZE_CELL) {

@@ -21,10 +21,10 @@ Game.prototype.startGame = function() {
   this.interval = setInterval(
     function() {
       this.clear();
-      this.addFood();
-      this.addEnemies();
       this.move();
       this.checkCollisions();
+      this.addFood();
+      this.addEnemies();
       this.update();
     }.bind(this),
     TIME_DELTA
@@ -89,10 +89,10 @@ Game.prototype.addEnemies = function() {
 };
 
 Game.prototype.addFood = function() {
-  if (this._food.length < FOOD_QTY) {
+  while (this._food.length < FOOD_QTY) {
     var food = new Ironsnack(this);
+    food._index = this._food.length;
     this._food.push(food);
-    this.addFood();
   }
 };
 
@@ -167,9 +167,11 @@ Game.prototype.checkCollisions = function() {
         this._player[0].eatSnack(snack[i], 0);
         this._food.splice(i, 1);
       }
-      if (checkHexCollision(getPosition(player2), getPosition(snack[i]))) {
-        this._player[1].eatSnack(snack[i], 1);
-        this._food.splice(i, 1);
+      if(snack[i] !== undefined){
+        if (checkHexCollision(getPosition(player2), getPosition(snack[i]))) {
+          this._player[1].eatSnack(snack[i], 1);
+          this._food.splice(i, 1);
+        }
       }
     }
   }
@@ -188,6 +190,7 @@ Game.prototype.checkCollisions = function() {
         }
       }
 
+      if(enemy[i] !== undefined){
       //Check collisions between player_2 and enemies
       if (checkHexCollision(getPosition(player2), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player2, enemy[i]);
@@ -198,9 +201,10 @@ Game.prototype.checkCollisions = function() {
           enemy.splice(i, 1);
         }
       }
+    }
 
       //Check collisions between enemies and snacks
-      if (snack.length != 0) {
+      if (snack.length != 0 && enemy[i] !== undefined) {
         for (var j = 0; j < snack.length; j++) {
           if (checkHexCollision(getPosition(enemy[i]), getPosition(snack[j]))) {
             enemy[i].eatSnack(snack[j], 0);
