@@ -126,8 +126,8 @@ Player.prototype.eatSnack = function(snack, playerIndex) {
       }
     }
 
-    if (this._life > 50 && doubled == 0) {
-      this._skill.push(SKILL_SET[skillIndex]);
+    if (this._life > 50 && doubled == 0) { 
+      this._skill.push(SKILL_SET[skillIndex].imgsrc);
     }
   }
   this._score += snack._energy;

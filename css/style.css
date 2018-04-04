@@ -9,8 +9,6 @@
 
 body {
   background-color: #b6b6b6 !important;
-/*   background-image: url("../img/bg_overlay.png");
-  background-repeat: no-repeat; */
 }
 
 h1 {
@@ -26,6 +24,14 @@ h2 {
 
 #score-p2 {
   text-align: right;
+}
+
+.bg{
+  position: fixed !important;
+}
+
+.bg > img{
+  opacity: 0.3;
 }
 
 .form-control {
@@ -45,9 +51,15 @@ h2 {
   box-shadow: 1px 1px 8px rgba(255, 255, 255, 0.062) !important;
 }
 
-.btn-success,
 .btn-primary {
   margin-top: 10px;
+}
+
+.btn-danger{
+  position: fixed !important;
+  top: 2.0em;
+  left: 45%;
+  z-index: 10;
 }
 
 .hidden {
@@ -62,4 +74,5 @@ h2 {
 .score{
   background-color: #f7f7f769;
   color: rgb(43, 43, 43);
+  z-index: 9;
 }

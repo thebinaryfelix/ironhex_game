@@ -2,15 +2,16 @@
 FPS = 60;
 TIME_DELTA = 1000 / FPS;
 
-TIME_GAME_OVER = 120; //In seconds. 0 for cancel.
-ENEMY_TIME_SPAN = 5;
-FOOD_TIME_SPAN = 5;
+TIME_GAME_OVER = 3; //In seconds. 0 for unlimited.
+
+ENEMY_TIME_SPAN = 5;  //Time in seconds.
+FOOD_TIME_SPAN = 5;   //Time in seconds.
 
 //PEVENT DEFAULT KEYBOARD BEHAVIOR FROM KEYS USED ON GAME
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
 //DEFAULT VALUES
-ENEMIES_QTY = 14;
+ENEMIES_QTY = 1;
 FOOD_QTY = 25;
 
 ENEMY_LIFE = 55;
@@ -43,7 +44,7 @@ PLAYER2_CONTROLS = {
 };
 
 //====================INITIAL POSITIONS INCREMENTS
-PLAYER1_SHIFT_X = 0; //---Change
-PLAYER1_SHIFT_Y = 0; //----Player
-PLAYER2_SHIFT_X = 0; //-----Initial
-PLAYER2_SHIFT_Y = 550; //------Position
+PLAYER1_SHIFT_X = 0;    //---Change
+PLAYER1_SHIFT_Y = 0;    //----Player
+PLAYER2_SHIFT_X = 0;    //-----Initial
+PLAYER2_SHIFT_Y = 550;  //------Position

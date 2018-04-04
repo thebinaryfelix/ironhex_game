@@ -16,8 +16,6 @@ function Game(boardName) {
 Game.prototype.startGame = function() {
   this.addPlayers();
 
-  this._gameStarted = true;
-
   this.interval = setInterval(
     function() {
       this.clear();
@@ -29,15 +27,8 @@ Game.prototype.startGame = function() {
     }.bind(this),
     TIME_DELTA
   );
+
   this.stopGame();
-};
-
-Game.prototype.gameOver = function(name) {
-
-  debugger;
-  clearInterval(this.interval);
-  this._gameStarted = false;
-  alert(name + "  is the winner!");
 };
 
 Game.prototype.stopGame = function() {
@@ -48,20 +39,36 @@ Game.prototype.stopGame = function() {
       function() {
         clearInterval(this.interval);
         this._gameStarted = false;
-        debugger;
-        if(this._player[0]._score > this._player[1]._score){
+
+        if (this._player[0]._score > this._player[1]._score) {
           this.gameOver(this._player[0]._name);
-        }
-        else if(this._player[0]._score < this._player[1]._score){
-         this.gameOver(this._player[1]._name);
-        }
-        else{
-          alert("Incredible! Both survived!");
+        } else if (this._player[0]._score < this._player[1]._score) {
+          this.gameOver(this._player[1]._name);
+        } else {
+          this.gameOver(0);
         }
       }.bind(this),
       TIME_GAME_OVER * 1000
     );
   }
+};
+
+Game.prototype.gameOver = function(name) {
+  clearInterval(this.interval);
+  this._gameStarted = false;
+  
+  if(name === 0){
+    alert("Incredible! Both survived!");
+  }
+  else{
+    alert(name + "  is the winner!");
+  }
+
+  $("#btn-reload").toggleClass("hidden").click(function() {
+    $("#btn-reload").toggleClass("hidden");
+    location.reload();
+  });
+
 };
 
 Game.prototype.clear = function() {
@@ -128,8 +135,8 @@ Game.prototype.update = function() {
   this._player[1].updatePosition();
   this._player[1].draw();
 
-  var scoreP1 = ""+this._player[0]._score;
-  var scoreP2 = ""+this._player[1]._score;
+  var scoreP1 = "" + this._player[0]._score;
+  var scoreP2 = "" + this._player[1]._score;
   $("#score-p1-text").text(scoreP1);
   $("#score-p2-text").text(scoreP2);
 };
@@ -140,7 +147,7 @@ Game.prototype.checkCollisions = function() {
   var snack = this._food;
   var enemy = this._enemies;
 
-  //Check collision between player and snack
+  //Check collisions between players and snacks
   if (snack.length != 0) {
     for (var i = 0; i < snack.length; i++) {
       if (checkHexCollision(getPosition(player1), getPosition(snack[i]))) {
@@ -153,6 +160,8 @@ Game.prototype.checkCollisions = function() {
       }
     }
   }
+
+  //Check collisions between players and enemies
   var enemyAttack = 0;
   if (enemy.length != 0) {
     for (var i = 0; i < enemy.length; i++) {
@@ -172,6 +181,8 @@ Game.prototype.checkCollisions = function() {
           enemy.splice(i, 1);
         }
       }
+
+      //Check collisions between enemies and snacks
       if (snack.length != 0) {
         for (var j = 0; j < snack.length; j++) {
           if (checkHexCollision(getPosition(enemy[i]), getPosition(snack[j]))) {
@@ -183,8 +194,8 @@ Game.prototype.checkCollisions = function() {
     }
   }
 
+  //Check collisions between players
   var playerAttack = 0;
-
   if (checkHexCollision(getPosition(player1), getPosition(player2))) {
     playerAttack = receiveDamage(player1, player2);
     if (playerAttack == 1) {
