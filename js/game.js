@@ -99,13 +99,15 @@ Game.prototype.addFood = function() {
 Game.prototype.addPlayers = function() {
   var initialScore = 0;
 
+  //Show player name in DOM
   this._player[0]._name = $("#input-player-1").val();
   this._player[0]._score = initialScore;
-  $("#score-p1-name").text("Score " + this._player[0]._name);
+  this._player[0]._skill[0] = SKILL_SET[0];
 
+  //Show player name in DOM
   this._player[1]._name = $("#input-player-2").val();
   this._player[1]._score = initialScore;
-  $("#score-p2-name").text("Score " + this._player[1]._name);
+  this._player[1]._skill[0] = SKILL_SET[0];
 };
 
 Game.prototype.move = function() {
@@ -140,10 +142,11 @@ Game.prototype.update = function() {
   this._player[1].updatePosition();
   this._player[1].draw();
 
-  var scoreP1 = "" + this._player[0]._score;
-  var scoreP2 = "" + this._player[1]._score;
-  $("#score-p1-text").text(scoreP1);
-  $("#score-p2-text").text(scoreP2);
+  $("#score-p1-text").text(this._player[0]._score);
+  $("#score-p2-text").text(this._player[1]._score);
+
+  $("#skill-p1 > span").text(this._player[0].showSkill());
+  $("#skill-p2 > span").text(this._player[1].showSkill());
 };
 
 Game.prototype.checkCollisions = function() {
@@ -207,12 +210,14 @@ Game.prototype.checkCollisions = function() {
   var deadPlayer = 0;
   if (checkHexCollision(getPosition(player1), getPosition(player2))) {
     deadPlayer = receiveDamage(player1, player2);
-    if (deadPlayer == 1) {
-      player2._score += Math.floor(player1._life);
-      this.gameOver(player2._name);
-    } else if (deadPlayer == 2) {
-      player1._score += Math.floor(player2._life);
-      this.gameOver(player1._name);
+    if (MULTIPLAYER === true) {
+      if (deadPlayer == 1) {
+        player2._score += Math.floor(player1._life);
+        this.gameOver(player2._name);
+      } else if (deadPlayer == 2) {
+        player1._score += Math.floor(player2._life);
+        this.gameOver(player1._name);
+      }
     }
   }
 };

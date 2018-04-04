@@ -4,6 +4,8 @@
 FPS = 60;
 TIME_DELTA = 1000 / FPS;
 
+MULTIPLAYER = true; //TRUE = two players;
+
 TIME_GAME_OVER = 0; //In seconds. 0 for unlimited.
 
 ENEMY_TIME_SPAN = 5; //Time in seconds.
@@ -13,7 +15,7 @@ FOOD_TIME_SPAN = 5; //Time in seconds.
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
 //DEFAULT VALUES
-ENEMIES_QTY = 5;
+ENEMIES_QTY = 0;
 FOOD_QTY = 40;
 
 ENEMY_LIFE = 45;

@@ -10,6 +10,7 @@ function Player(game, INITIAL_X_INCREMENT, INITIAL_Y_INCREMENT) {
   this._direction_Y = 0;
 
   this._skill = []; //Stores one or more skills gained by eating Iron Snacks
+  this._skillPoints = 0; //Spent by using skills
 
   this._receiveDamage = true;
 }
@@ -111,13 +112,23 @@ Player.prototype.draw = function() {
   );
 };
 
-Player.prototype.eatSnack = function(snack, playerIndex) {
-  var doubled = 0;
-  var skillIndex = Math.floor(this._life / 50);
+Player.prototype.eatSnack = function(snack) {
 
+  //Adds snack energy to player's life and score
   if (this._life <= MAX_LIFE) {
     this._life += snack._energy;
     this._strength = this._life * 1.5;
+  }
+  this._score += snack._energy;
+  
+  //Adds points to spend with skills.
+  this._skillPoints += snack._energy;
+
+  //Calculates which skill the player can receive
+  var doubled = 0;
+  var skillIndex = Math.floor(this._skillPoints / 50);
+  
+  if (skillIndex < SKILL_SET.length) {
     for (var i = 0; i < this._skill.length; i++) {
       if (
         this._skill[i].skillName.indexOf(SKILL_SET[skillIndex].skillName) != -1
@@ -126,13 +137,19 @@ Player.prototype.eatSnack = function(snack, playerIndex) {
       }
     }
 
-    if (this._life > 50 && doubled == 0) {
+    if (this._skillPoints > 50 && doubled == 0) {
+      
       this._skill.push(SKILL_SET[skillIndex]);
     }
+/*     console.table(this._skill[i-1]); */
   }
-  this._score += snack._energy;
+};
+
+Player.prototype.showSkill = function(index){
+  skillArray = this._skill.length-1;
+  return this._skill[skillArray].skillName;
 };
 
 Player.prototype.activateSkill = function() {
-  console.log("Skill key active");
+  console.log("Calling the motherfucker skiiiiiill!!");
 };
