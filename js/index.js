@@ -12,11 +12,9 @@ $(function() {
   $("#btn-start").click(function() {
     if ($("#input-player-1").val() == "" || $("#input-player-2").val() == "") {
       alert("HOHOHO! You must have a name, dear youngling!");
-    } else if($("#input-player-1").val() == $("#input-player-2").val()){
+    } else if ($("#input-player-1").val() == $("#input-player-2").val()) {
       alert("WOW! You shouldn't play with yourself :( It's so saaaad");
-    }
-    else
-    {
+    } else {
       loadBoard();
     }
   });
@@ -31,7 +29,7 @@ function loadBoard() {
   }, 400);
 
   var ironhex = new Game("main-board");
-  ironhex._gameStarted = true;
+  
   ironhex.startGame();
 
   //Alert user before refreshing or closing page
@@ -42,20 +40,14 @@ function loadBoard() {
   };
 
   //Keyboard listeners
-  document.addEventListener(
-    "keydown",
-    function(pressedKey) {
-      keys[pressedKey.keyCode] = true;
-      if (DEFAULT_KEY.indexOf(pressedKey.keyCode) != -1) {
-        pressedKey.preventDefault();
-      }
+  document.addEventListener("keydown", function(pressedKey) {
+    keys[pressedKey.keyCode] = true;
+    if (DEFAULT_KEY.indexOf(pressedKey.keyCode) != -1) {
+      pressedKey.preventDefault();
     }
-  );
+  });
 
-  document.addEventListener(
-    "keyup",
-    function(releasedKey) {
-      keys[releasedKey.keyCode] = false;
-    }
-  );
+  document.addEventListener("keyup", function(releasedKey) {
+    keys[releasedKey.keyCode] = false;
+  });
 }

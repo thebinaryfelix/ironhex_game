@@ -28,7 +28,7 @@ Ironsnack.prototype.draw = function() {
   } else {
     color = "#790D8C";
   }
-  drawSnack(
+  drawHex(
     this._game,
     this._position_X,
     this._position_Y,

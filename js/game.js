@@ -16,14 +16,16 @@ function Game(boardName) {
 Game.prototype.startGame = function() {
   this.addPlayers();
 
+  this._gameStarted = true;
+
   this.interval = setInterval(
     function() {
       this.clear();
       this.addFood();
       this.addEnemies();
       this.move();
-      this.update();
       this.checkCollisions();
+      this.update();
     }.bind(this),
     TIME_DELTA
   );
@@ -35,17 +37,20 @@ Game.prototype.stopGame = function() {
   if (TIME_GAME_OVER == 0) {
     return;
   } else {
-    setTimeout(
+    this._timeOut = setTimeout(
       function() {
         clearInterval(this.interval);
         this._gameStarted = false;
 
         if (this._player[0]._score > this._player[1]._score) {
           this.gameOver(this._player[0]._name);
+          clearTimeout(this._timeOut);
         } else if (this._player[0]._score < this._player[1]._score) {
           this.gameOver(this._player[1]._name);
+          clearTimeout(this._timeOut);
         } else {
           this.gameOver(0);
+          clearTimeout(this._timeOut);
         }
       }.bind(this),
       TIME_GAME_OVER * 1000
@@ -57,18 +62,18 @@ Game.prototype.gameOver = function(name) {
   clearInterval(this.interval);
   this._gameStarted = false;
 
-  if(name === 0){
+  if (name === 0) {
     alert("Incredible! Both survived!");
-  }
-  else{
+  } else {
     alert(name + "  is the winner!");
   }
 
-  $("#btn-reload").toggleClass("hidden").click(function() {
-    $("#btn-reload").toggleClass("hidden");
-    location.reload();
-  });
-
+  $("#btn-reload")
+    .toggleClass("hidden")
+    .click(function() {
+      $("#btn-reload").toggleClass("hidden");
+      location.reload();
+    });
 };
 
 Game.prototype.clear = function() {
@@ -161,17 +166,16 @@ Game.prototype.checkCollisions = function() {
     }
   }
 
-  
   var enemyAttack = 0;
   if (enemy.length != 0) {
     for (var i = 0; i < enemy.length; i++) {
-
       //Check collisions between player_1 and enemies
       if (checkHexCollision(getPosition(player1), getPosition(enemy[i]))) {
         enemyAttack = receiveDamage(player1, enemy[i]);
         if (enemyAttack == 1) {
           this.gameOver(player2._name);
         } else if (enemyAttack == 2) {
+          player1._score += Math.floor(enemy[i]._life);
           enemy.splice(i, 1);
         }
       }
@@ -182,6 +186,7 @@ Game.prototype.checkCollisions = function() {
         if (enemyAttack == 1) {
           this.gameOver(player1._name);
         } else if (enemyAttack == 2) {
+          player2._score += Math.floor(enemy[i]._life);
           enemy.splice(i, 1);
         }
       }
@@ -199,12 +204,14 @@ Game.prototype.checkCollisions = function() {
   }
 
   //Check collisions between players
-  var playerAttack = 0;
+  var deadPlayer = 0;
   if (checkHexCollision(getPosition(player1), getPosition(player2))) {
-    playerAttack = receiveDamage(player1, player2);
-    if (playerAttack == 1) {
+    deadPlayer = receiveDamage(player1, player2);
+    if (deadPlayer == 1) {
+      player2._score += Math.floor(player1._life);
       this.gameOver(player2._name);
-    } else if (playerAttack == 2) {
+    } else if (deadPlayer == 2) {
+      player1._score += Math.floor(player2._life);
       this.gameOver(player1._name);
     }
   }
