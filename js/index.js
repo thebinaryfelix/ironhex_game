@@ -34,7 +34,7 @@ function loadBoard() {
 
   //Alert user before refreshing or closing page
   window.onbeforeunload = function() {
-    if (ironhex._gameStarted) {
+    if (ironhex.gameStarted) {
       return true;
     }
   };

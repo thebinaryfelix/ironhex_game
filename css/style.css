@@ -15,7 +15,7 @@ html{
 
 body {
 
-  background-color: #0c0c0c !important;
+  background-color: #5a5a5a !important;
 
 }
 
@@ -73,11 +73,22 @@ h2 {
   margin-top: 10px;
 }
 
-.btn-danger{
+.game-over{
   position: fixed !important;
-  top: 1.9em;
-  left: 47%;
+  top: 25%;
+  left: 33%;
+  padding: 0 10px 10px 10px;
+  text-align: center;
+  font-family: 'Rubik', sans-serif !important; 
+  font-size: 2.0em;
+  color: rgb(155, 0, 0);
+  background-color: rgba(245, 245, 245, 0.76);
+  border-radius: 8px;
   z-index: 10;
+}
+
+.game-over > h3{
+  font-size: 3.0em;
 }
 
 .hidden {
@@ -90,9 +101,14 @@ h2 {
 }
 
 .score{
-  background-color: #afafaf93;
+  background-color: #afafaf46;
   color: rgb(207, 207, 207);
   z-index: 9;
+}
+
+.progress-bar{
+  background-color: rgb(175, 3, 3) !important;
+  font-family: 'Rubik', sans-serif !important; 
 }
 
 #score-p1{
@@ -104,5 +120,5 @@ h2 {
 }
 
 p{
-  font-size: 1.3em !important;
+  font-size: 1.2em !important;
 }

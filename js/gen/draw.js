@@ -1,14 +1,22 @@
-function drawHex(game, x, y, side, diagonal, color, life) {
-  this._game = game;
-  this._game._ctx.beginPath();
-  this._game._ctx.fillStyle = color;
-  this._game._ctx.moveTo(x, y - diagonal);
-  this._game._ctx.lineTo(x + side, y - diagonal / 2);
-  this._game._ctx.lineTo(x + side, y + diagonal / 2);
-  this._game._ctx.lineTo(x, y + diagonal);
-  this._game._ctx.lineTo(x - side, y + diagonal / 2);
-  this._game._ctx.lineTo(x - side, y - diagonal / 2);
-  this._game._ctx.moveTo(x, y - diagonal);
-  this._game._ctx.fill();
-  this._game._ctx.closePath();
+function drawHex(ctx, x, y, side, radius, color) {
+  
+  //Draw Circle
+  ctx.beginPath();
+  ctx.fillStyle = color;
+  ctx.arc(x, y, radius, 0, 2*Math.PI);
+  ctx.stroke();
+  ctx.closePath();
+
+  //Draw Hexagon
+  ctx.beginPath();
+  ctx.moveTo(x, y - radius);
+  ctx.lineTo(x + side, y - radius / 2);
+  ctx.lineTo(x + side, y + radius / 2);
+  ctx.lineTo(x, y + radius);
+  ctx.lineTo(x - side, y + radius / 2);
+  ctx.lineTo(x - side, y - radius / 2);
+  ctx.lineTo(x, y - radius);
+  ctx.moveTo(x, y);
+  ctx.fill();
+  ctx.closePath();
 }

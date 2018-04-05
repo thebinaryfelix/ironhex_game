@@ -1,18 +1,18 @@
 function Ironsnack(game) {
-  this._game = game;
+  this.game = game;
 
-  this._energy = Math.floor(Math.random() * MAX_SIZE_FOOD + MIN_SIZE_FOOD); //Random number between 10 and 15
+  this.energy = Math.floor(Math.random() * (MAX_SIZE_FOOD - MIN_SIZE_FOOD) + MIN_SIZE_FOOD);
 
-  this._diagonal = this._energy;
-  this._side = Math.sqrt(
-    Math.pow(this._diagonal, 2) - Math.pow(this._diagonal / 2, 2)
+  this.radius = this.energy;
+  this.side = Math.floor(Math.sqrt(
+    Math.pow(this.radius, 2) - Math.pow(this.radius / 2, 2)
+  ));
+
+  this.positionX = Math.floor(
+    Math.random() * (this.game.board.width - 2 * this.side) + this.side
   );
-
-  this._position_X = Math.floor(
-    Math.random() * (this._game._board.width - 2 * this._side) + this._side
-  );
-  this._position_Y = Math.floor(
-    Math.random() * (this._game._board.height - 2 * this._diagonal) + this._side
+  this.positionY = Math.floor(
+    Math.random() * (this.game.board.height - 2 * this.radius) + this.side
   );
 }
 
@@ -21,20 +21,19 @@ Ironsnack.prototype.draw = function() {
   var med = MAX_SIZE_FOOD - 3;
   var min = MAX_SIZE_FOOD - 8;
 
-  if (this._energy <= min) {
+  if (this.energy <= min) {
     color = "#FF8506";
-  } else if (this._energy <= med) {
+  } else if (this.energy <= med) {
     color = "#25E02F";
   } else {
     color = "#790D8C";
   }
   drawHex(
-    this._game,
-    this._position_X,
-    this._position_Y,
-    this._side,
-    this._diagonal,
-    color,
-    this._energy
+    this.game.ctx,
+    this.positionX,
+    this.positionY,
+    this.side,
+    this.radius,
+    color
   );
 };

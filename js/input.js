@@ -1,18 +1,18 @@
 function playerInput(keyActive) {
   var playerMovement = {
-    moving_X: 0,
-    moving_Y: 0,
+    movingX: 0,
+    movingY: 0,
     skill: false
   };
   if (keys[keyActive.LEFT]) {
-    playerMovement.moving_X = -1;
+    playerMovement.movingX = -1;
   } else if (keys[keyActive.RIGHT]) {
-    playerMovement.moving_X = 1;
+    playerMovement.movingX = 1;
   }
   if (keys[keyActive.UP]) {
-    playerMovement.moving_Y = -1;
+    playerMovement.movingY = -1;
   } else if (keys[keyActive.DOWN]) {
-    playerMovement.moving_Y = 1;
+    playerMovement.movingY = 1;
   }
   if (keys[keyActive.SKILL]) {
     playerMovement.skill = true;
