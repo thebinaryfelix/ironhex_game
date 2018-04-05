@@ -12,7 +12,7 @@ TIME_GAME_OVER = 0; //In seconds. 0 for infinite.
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
 //DEFAULT VALUES
-ENEMIES_QTY = 0;
+ENEMIES_QTY = 10;
 FOOD_QTY = 25;
 
 ENEMY_LIFE = 55;
