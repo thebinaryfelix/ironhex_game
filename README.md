@@ -1,6 +1,7 @@
 # IronHex Game
 
 First Ironhack Game Project
+
 *This is a game for two players*
 
 ## Context
