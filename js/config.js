@@ -1,35 +1,35 @@
 /* Global variables used in game. Game functions don't change these. */
 
-MULTIPLAYER = true; //TRUE => game ends when *one* player dies | FALSE => game ends when *both* players die
-
 //======================VIDEO
-FPS = 50;
+FPS = 60;
 TIME_DELTA = 1000 / FPS;
 
 TIME_GAME_OVER = 0; //In seconds. 0 for infinite.
 
-//PEVENT DEFAULT KEYBOARD BEHAVIOR FROM KEYS USED ON GAME
+//PEVENT DEFAULT KEYBOARD BEHAVIOR FROM GAME KEYS
 DEFAULT_KEY = [32, 37, 38, 39, 40, 65, 68, 81, 83, 87];
 
 //DEFAULT VALUES
 ENEMIES_QTY = 10;
-FOOD_QTY = 25;
+ENEMY_LIFE = 65;
 
-ENEMY_LIFE = 55;
+FOOD_QTY = 25;
+MAX_SIZE_FOOD = 20;
+MIN_SIZE_FOOD = 5;
+
+//PLAYERS
 LIFE = 40;
-MAX_LIFE = 200;
-MAX_MANA = MAX_LIFE;
+MAX_LIFE = 150;
+MAX_MANA = 200;
+MIN_SKILL_POINT = 50;
 
 MAX_SIZE_CELL = 100;
 MIN_SIZE_CELL = 20;
 
-MAX_SIZE_FOOD = 15;
-MIN_SIZE_FOOD = 5;
-
 //=====================PLAYERS SPEED
-V_UNITS = 50;
+V_UNITS = 40;
 SPEED = V_UNITS / TIME_DELTA;
-DIAGONAL_COS = Math.cos(Math.PI / 4); // ==> Otherwise, speed adds up when on diagonal movement.
+DIAGONAL_COS = Math.cos(Math.PI / 4); // ==> Otherwise, speed adds up on diagonal movement.
 
 //====================CONTROLS
 PLAYER1_CONTROLS = {

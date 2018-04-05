@@ -14,10 +14,13 @@ function Player(game, INITIAL_X_INCREMENT, INITIAL_Y_INCREMENT) {
   this.directionX = 0;
   this.directionY = 0;
 
+  this.speed = SPEED;
+
   this.skill = []; //Stores one or more skills gained by eating Iron Snacks
   this.skillPoints = 0; //Spent by using skills
 
   this.receiveDamage = true;
+  this.overrideDefense = false;
 }
 
 Player.prototype.setBoardLimits = function() {
@@ -52,6 +55,7 @@ Player.prototype.setBoardLimits = function() {
 Player.prototype.setMove = function(value) {
   if (value.skill == true) {
     this.activateSkill();
+    keys[PLAYER1_CONTROLS.SKILL] = false;
   }
   if (value.movingX == -1) {
     if (value.movingY == -1) {
@@ -95,21 +99,15 @@ Player.prototype.updatePosition = function() {
     this.positionY += 0;
   } else {
     this.positionX +=
-      this.directionX * SPEED * (V_UNITS / (this.radius + 10));
+      this.directionX * this.speed * (V_UNITS / (this.radius + MIN_SIZE_CELL));
     this.positionY +=
-      this.directionY * SPEED * (V_UNITS / (this.radius + 10));
+      this.directionY * this.speed * (V_UNITS / (this.radius + MIN_SIZE_CELL));
   }
   return true;
 };
 
 Player.prototype.draw = function() {
-  var newSize = this.life;
-
-  if (newSize > MAX_SIZE_CELL) {
-    newSize = MAX_SIZE_CELL;
-  }
-
-  this.radius = Math.floor(newSize / 2);
+  this.radius = Math.floor(this.life / 2);
   this.side = Math.floor(
     Math.sqrt(Math.pow(this.radius, 2) - Math.pow(this.radius / 2, 2))
   );
@@ -125,30 +123,27 @@ Player.prototype.draw = function() {
 };
 
 Player.prototype.eatSnack = function(snack) {
-
   //Adds snack energy to player's life and score
   this.score += snack.energy;
 
-  if(this.life + snack.energy <= MAX_LIFE){
+  if (this.life + snack.energy <= MAX_LIFE) {
     this.life += snack.energy;
-  }
-  else{
+  } else {
     this.life = MAX_LIFE;
   }
 
   this.strength = this.life * 1.5;
 
-  //Adds points to spend with skills.
-  if(this.skillPoints + snack.energy <= MAX_MANA){
+  //Adds points to spend with skills
+  if (this.skillPoints + snack.energy <= MAX_MANA) {
     this.skillPoints += snack.energy;
-  }
-  else{
+  } else {
     this.skillPoints = MAX_MANA;
   }
 
   //Calculates which skill the player can receive
   var doubled = 0;
-  var skillIndex = Math.floor(this.skillPoints / 50);
+  var skillIndex = Math.floor(this.skillPoints / MIN_SKILL_POINT);
 
   if (skillIndex < SKILL_SET.length) {
     for (var i = 0; i < this.skill.length; i++) {
@@ -159,7 +154,7 @@ Player.prototype.eatSnack = function(snack) {
       }
     }
 
-    if (this.skillPoints >= 50 && doubled == 0) {
+    if (this.skillPoints >= MIN_SKILL_POINT && doubled == 0) {
       this.skill.push(SKILL_SET[skillIndex]);
     }
   }
@@ -171,5 +166,18 @@ Player.prototype.showSkill = function(index) {
 };
 
 Player.prototype.activateSkill = function() {
-  console.log("Calling skill");
+  setTimeout(
+    function() {
+      var skillLength = this.skill.length - 1;
+      if (this.skillPoints >= this.skill[skillLength].credit) {
+        this.skill[skillLength].action(this);
+        for (i = skillLength; i > 0; i--) {
+          if (this.skillPoints < this.skill[i].credit) {
+            this.skill.splice(i, 1);
+          }
+        }
+      }
+    }.bind(this),
+    100
+  );
 };

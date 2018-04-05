@@ -1,12 +1,14 @@
 function Ironsnack(game) {
   this.game = game;
 
-  this.energy = Math.floor(Math.random() * (MAX_SIZE_FOOD - MIN_SIZE_FOOD) + MIN_SIZE_FOOD);
+  this.energy = Math.floor(
+    Math.random() * (MAX_SIZE_FOOD - MIN_SIZE_FOOD) + MIN_SIZE_FOOD
+  );
 
   this.radius = this.energy;
-  this.side = Math.floor(Math.sqrt(
-    Math.pow(this.radius, 2) - Math.pow(this.radius / 2, 2)
-  ));
+  this.side = Math.floor(
+    Math.sqrt(Math.pow(this.radius, 2) - Math.pow(this.radius / 2, 2))
+  );
 
   this.positionX = Math.floor(
     Math.random() * (this.game.board.width - 2 * this.side) + this.side

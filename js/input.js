@@ -17,6 +17,6 @@ function playerInput(keyActive) {
   if (keys[keyActive.SKILL]) {
     playerMovement.skill = true;
   }
-  
+
   return playerMovement;
 }

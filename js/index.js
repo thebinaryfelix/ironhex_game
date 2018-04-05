@@ -21,7 +21,6 @@ $(function() {
 });
 
 function loadBoard() {
-
   $(".landing-page").fadeOut(300);
   setTimeout(function() {
     $(".board-game").fadeIn(1000);
@@ -29,7 +28,7 @@ function loadBoard() {
   }, 400);
 
   var ironhex = new Game("main-board");
-  
+
   ironhex.startGame();
 
   //Alert user before refreshing or closing page

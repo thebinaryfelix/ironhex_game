@@ -4,10 +4,7 @@ function Game(boardName) {
   this.board.height = window.innerHeight;
   this.ctx = this.board.getContext("2d");
   this.score = [0, 0];
-  this.player = [
-    new Player(this, 0, 0),
-    new Player(this, this.board.width, 0)
-  ];
+  this.player = [new Player(this, 0, 0), new Player(this, this.board.width, 0)];
   this.food = [];
   this.enemies = [];
   this.currentPositions = [];
@@ -68,11 +65,15 @@ Game.prototype.gameOver = function(name) {
     alert(name + "  is the winner!");
   }
 
-  $(".game-over").fadeIn().toggleClass("hidden");
+  $(".game-over")
+    .fadeIn()
+    .toggleClass("hidden");
   $("#btn-reload").click(function() {
-      $(".game-over").fadeOut().toggleClass("hidden");
-      location.reload();
-    });
+    $(".game-over")
+      .fadeOut()
+      .toggleClass("hidden");
+    location.reload();
+  });
 };
 
 Game.prototype.clear = function() {
@@ -213,14 +214,12 @@ Game.prototype.checkCollisions = function() {
     /* bounceBack(getPosition(player1), getPosition(player2)); */
 
     deadPlayer = receiveDamage(player1, player2);
-    if (MULTIPLAYER === true) {
-      if (deadPlayer == 1) {
-        player2.score += Math.floor(player1.life);
-        this.gameOver(player2.name);
-      } else if (deadPlayer == 2) {
-        player1.score += Math.floor(player2.life);
-        this.gameOver(player1.name);
-      }
+    if (deadPlayer == 1) {
+      player2.score += Math.floor(player1.life);
+      this.gameOver(player2.name);
+    } else if (deadPlayer == 2) {
+      player1.score += Math.floor(player2.life);
+      this.gameOver(player1.name);
     }
   }
 };
@@ -237,19 +236,18 @@ Game.prototype.writePlayerInfo = function() {
   $("#skill-p2 > span").text(this.player[1].showSkill());
 
   //Update player's life bar
-  var wLifeBar = ((this.player[0].life*100)/MAX_LIFE);
-  $("#health-bar-p1").width(wLifeBar  + "%");
+  var wLifeBar = this.player[0].life * 100 / MAX_LIFE;
+  $("#health-bar-p1").width(wLifeBar + "%");
 
-  if(wLifeBar < 30){
+  if (wLifeBar < 30) {
     $("#health-bar-p1").addClass("bar-danger");
   }
 
-  wLifeBar = ((this.player[1].life*100)/MAX_LIFE);
+  wLifeBar = this.player[1].life * 100 / MAX_LIFE;
   $("#health-bar-p2").width(wLifeBar + "%");
 
-  var wManaBar = ((this.player[0].skillPoints*100)/MAX_MANA);
+  var wManaBar = this.player[0].skillPoints * 100 / MAX_MANA;
   $("#mana-bar-p1").width(wManaBar + "%");
-  wManaBar = ((this.player[1].skillPoints*100)/MAX_MANA);
+  wManaBar = this.player[1].skillPoints * 100 / MAX_MANA;
   $("#mana-bar-p2").width(wManaBar + "%");
-
 };
