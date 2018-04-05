@@ -14,7 +14,7 @@ html{
 }
 
 body {
-  background-color: #5a5a5a !important;
+  background-color: #ff82829d !important;
 }
 
 li{
@@ -47,7 +47,7 @@ h2 {
 }
 
 .bg > img{
-  opacity: 0.3;
+  opacity: 0.8;
 }
 
 .form-control {
@@ -100,7 +100,7 @@ h2 {
 
 .score{
   background-color: #afafaf46;
-  color: rgb(207, 207, 207);
+  color: rgb(32, 32, 32);
   z-index: 9;
 }
 
